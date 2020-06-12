@@ -7,7 +7,7 @@ function readUsingDataView(event) {
 	let pointFormat = event.data.pointFormatID;
 
 	// gps time byte offsets from LAS specification
-	let gpsOffsets = [null, 20, null, 20, 20, 20, 22, 22, 22, 22, 22] 
+	let gpsOffsets = [null, 20, null, 20, 20, 20, 22, 22, 22, 22, 22]; 
 	let gpsOffset = gpsOffsets[pointFormat];
 
 	let scale = event.data.scale;
@@ -48,8 +48,8 @@ function readUsingDataView(event) {
 	let returnNumbers = new Uint8Array(rnBuff);
 	let numberOfReturns = new Uint8Array(nrBuff);
 	let pointSourceIDs = new Uint16Array(psBuff);
-	let gpsTime64 = new Float64Array(gpsBuff64)
-	let gpsTime32 = new Float32Array(gpsBuff32)
+	let gpsTime64 = new Float64Array(gpsBuff64);
+	let gpsTime32 = new Float32Array(gpsBuff32);
 
 	// Point format 3 contains an 8-byte GpsTime before RGB values, so make
 	// sure we have the correct color offset.
@@ -62,9 +62,9 @@ function readUsingDataView(event) {
 		let r, g, b, pos;
 		for (let i = 0; i < numPoints && !twoByteColor; ++i) {
 			pos = i * pointSize;
-			r = sourceView.getUint16(pos + co, true)
-			g = sourceView.getUint16(pos + co + 2, true)
-			b = sourceView.getUint16(pos + co + 4, true)
+			r = sourceView.getUint16(pos + co, true);
+			g = sourceView.getUint16(pos + co + 2, true);
+			b = sourceView.getUint16(pos + co + 4, true);
 			if (r > 255 || g > 255 || b > 255) twoByteColor = true;
 		}
 	}
@@ -117,9 +117,9 @@ function readUsingDataView(event) {
 
 		// COLOR, if available
 		if (hasColor) {
-			let r = sourceView.getUint16(i * pointSize + co, true)
-			let g = sourceView.getUint16(i * pointSize + co + 2, true)
-			let b = sourceView.getUint16(i * pointSize + co + 4, true)
+			let r = sourceView.getUint16(i * pointSize + co, true);
+			let g = sourceView.getUint16(i * pointSize + co + 2, true);
+			let b = sourceView.getUint16(i * pointSize + co + 4, true);
 
 			if (twoByteColor) {
 				r /= 256;
@@ -134,16 +134,16 @@ function readUsingDataView(event) {
 		}
 	}
 
-	let min = Infinity
-	let max = -Infinity
+	let min = Infinity;
+	let max = -Infinity;
 
 	for (let i = 0; i < numPoints; i++) {
-		min = Math.min(min, gpsTime64[i])
-		max = Math.max(max, gpsTime64[i])
+		min = Math.min(min, gpsTime64[i]);
+		max = Math.max(max, gpsTime64[i]);
 	}
 
 	for (let i = 0; i < numPoints; i++) {
-		gpsTime32[i] = gpsTime64[i] = min
+		gpsTime32[i] = gpsTime64[i] = min;
 	}
 
 	let indices = new ArrayBuffer(numPoints * 4);
@@ -176,7 +176,7 @@ function readUsingDataView(event) {
 		tightBoundingBox: tightBoundingBox,
 		indices: indices,
 		gpsTime: gpsBuff32,
-		gpsMeta: { offset: min, range: max-min }
+		gpsMeta: { offset: min, range: max - min }
 	};
 
 	let transferables = [

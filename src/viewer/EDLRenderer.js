@@ -51,8 +51,8 @@ export class EDLRenderer{
 			height = this.screenshot.target.height;
 		}
 
-		this.rtEDL.setSize(width , height);
-		this.rtRegular.setSize(width , height);
+		this.rtEDL.setSize(width, height);
+		this.rtRegular.setSize(width, height);
 	}
 
 	makeScreenshot(camera, size, callback){
@@ -191,7 +191,7 @@ export class EDLRenderer{
 		const camera = params.camera ? params.camera : viewer.scene.getActiveCamera();
 		const {width, height} = this.viewer.renderer.getSize(new THREE.Vector2());
 
-		viewer.dispatchEvent({type: "render.pass.begin",viewer: viewer});
+		viewer.dispatchEvent({type: "render.pass.begin", viewer: viewer});
 		
 		this.resize(width, height);
 
@@ -301,13 +301,13 @@ export class EDLRenderer{
 
 		viewer.transformationTool.update();
 
-		viewer.dispatchEvent({type: "render.pass.perspective_overlay",viewer: viewer});
+		viewer.dispatchEvent({type: "render.pass.perspective_overlay", viewer: viewer});
 
 		viewer.renderer.render(viewer.controls.sceneControls, camera);
 		viewer.renderer.render(viewer.clippingTool.sceneVolume, camera);
 		viewer.renderer.render(viewer.transformationTool.scene, camera);
 		
-		viewer.dispatchEvent({type: "render.pass.end",viewer: viewer});
+		viewer.dispatchEvent({type: "render.pass.end", viewer: viewer});
 
 	}
 }

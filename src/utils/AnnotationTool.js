@@ -1,3 +1,4 @@
+import * as THREE from 'three';
 
 import {Annotation} from "../Annotation.js";
 import {Utils} from "../utils.js";

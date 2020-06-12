@@ -1,4 +1,4 @@
-
+import * as THREE from 'three';
 import {Measure} from "./Measure.js";
 import {Utils} from "../utils.js";
 import {CameraMode} from "../defines.js";
@@ -140,8 +140,8 @@ export class MeasuringTool extends EventDispatcher{
 
 		this.viewer.inputHandler.registerInteractiveScene(this.scene);
 
-		this.onRemove = (e) => { this.scene.remove(e.measurement);};
-		this.onAdd = e => {this.scene.add(e.measurement);};
+		this.onRemove = (e) => { this.scene.remove(e.measurement); };
+		this.onAdd = e => { this.scene.add(e.measurement); };
 
 		for(let measurement of viewer.scene.measurements){
 			this.onAdd({measurement: measurement});

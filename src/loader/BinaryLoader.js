@@ -1,4 +1,4 @@
-
+import * as THREE from 'three';
 
 import {Version} from "../Version.js";
 import {XHRFactory} from "../XHRFactory.js";
@@ -34,7 +34,7 @@ export class BinaryLoader{
 		xhr.overrideMimeType('text/plain; charset=x-user-defined');
 		xhr.onreadystatechange = () => {
 			if (xhr.readyState === 4) {
-				if((xhr.status === 200 || xhr.status === 0) &&  xhr.response !== null){
+				if((xhr.status === 200 || xhr.status === 0) && xhr.response !== null){
 					let buffer = xhr.response;
 					this.parse(node, buffer);
 				} else {

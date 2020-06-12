@@ -1,4 +1,4 @@
-
+import * as THREE from 'three';
 import {PointCloudTree} from "./PointCloudTree.js";
 import {PointSizeType, ClipTask, ElevationGradientRepeat} from "./defines.js";
 
@@ -515,7 +515,7 @@ class WebGLTexture {
 			gl.texImage2D(this.target, level, internalFormat,
 				internalFormat, srcType, data);
 
-			if (texture instanceof THREE.Texture) {gl.generateMipmap(gl.TEXTURE_2D);}
+			if (texture instanceof THREE.Texture) { gl.generateMipmap(gl.TEXTURE_2D); }
 		}
 
 		gl.bindTexture(this.target, null);
@@ -831,7 +831,7 @@ export class Renderer {
 
 					let worldViewMatrices = shadowMaps
 						.map(sm => sm.camera.matrixWorldInverse)
-						.map(view => new THREE.Matrix4().multiplyMatrices(view, world))
+						.map(view => new THREE.Matrix4().multiplyMatrices(view, world));
 
 					let flattenedMatrices = [].concat(...worldViewMatrices.map(c => c.elements));
 					const lWorldView = shader.uniformLocations["uShadowWorldView[0]"];
@@ -932,8 +932,8 @@ export class Renderer {
 			gl.bindVertexArray(webglBuffer.vao);
 
 			let isExtraAttribute =
-				attributeLocations[material.activeAttributeName] === undefined
-				&& Object.keys(geometry.attributes).includes(material.activeAttributeName);
+				attributeLocations[material.activeAttributeName] === undefined &&
+				Object.keys(geometry.attributes).includes(material.activeAttributeName);
 
 			if(isExtraAttribute){
 
@@ -1111,13 +1111,13 @@ export class Renderer {
 				let fsVersionIndex = fs.indexOf("#version ");
 
 				if(vsVersionIndex >= 0){
-					vs = vs.replace(/(#version .*)/, `$1\n${definesString}`)
+					vs = vs.replace(/(#version .*)/, `$1\n${definesString}`);
 				}else{
 					vs = `${definesString}\n${vs}`;
 				}
 
 				if(fsVersionIndex >= 0){
-					fs = fs.replace(/(#version .*)/, `$1\n${definesString}`)
+					fs = fs.replace(/(#version .*)/, `$1\n${definesString}`);
 				}else{
 					fs = `${definesString}\n${fs}`;
 				}
@@ -1249,7 +1249,7 @@ export class Renderer {
 
 					//let clipToWorld = new THREE.Matrix4().multiplyMatrices(mTranslate, mScale);
 					let clipToWorld = clipSphere.matrixWorld;
-					let viewToWorld = camera.matrixWorld
+					let viewToWorld = camera.matrixWorld;
 					let worldToClip = new THREE.Matrix4().getInverse(clipToWorld);
 
 					let viewToClip = new THREE.Matrix4().multiplyMatrices(worldToClip, viewToWorld);
@@ -1439,7 +1439,7 @@ export class Renderer {
 
 		// CLEANUP
 		gl.activeTexture(gl.TEXTURE1);
-		gl.bindTexture(gl.TEXTURE_2D, null)
+		gl.bindTexture(gl.TEXTURE_2D, null);
 
 		this.threeRenderer.state.reset();
 	}

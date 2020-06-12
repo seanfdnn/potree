@@ -1,3 +1,4 @@
+import * as THREE from 'three';
 
 
 import {BoxVolume} from "./Volume.js";
@@ -40,7 +41,7 @@ export class ScreenBoxSelectTool extends EventDispatcher{
 		selectionBox.css("right", "10px");
 		selectionBox.css("bottom", "10px");
 
-		let drag = e =>{
+		let drag = e => {
 
 			volume.visible = true;
 

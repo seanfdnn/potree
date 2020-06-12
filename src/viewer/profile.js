@@ -66,7 +66,7 @@ class ProfileFakeOctree extends PointCloudTree{
 		this.material.pointSizeType = PointSizeType.FIXED;
 
 		this.batchSize = 100 * 1000;
-		this.currentBatch = null
+		this.currentBatch = null;
 	}
 
 	getAttribute(name){
@@ -539,7 +539,7 @@ export class ProfileWindow extends EventDispatcher {
 				}
 
 				numTested++;
-				numTestedPoints += points.numPoints
+				numTestedPoints += points.numPoints;
 
 				for (let i = 0; i < points.numPoints; i++) {
 
@@ -831,8 +831,8 @@ export class ProfileWindow extends EventDispatcher {
 	requestScaleUpdate(){
 
 		let threshold = 100;
-		let allowUpdate = ((this.lastReset === undefined) || (this.lastScaleUpdate === undefined)) 
-			|| ((new Date().getTime() - this.lastReset) > threshold && (new Date().getTime() - this.lastScaleUpdate) > threshold);
+		let allowUpdate = ((this.lastReset === undefined) || (this.lastScaleUpdate === undefined)) || 
+			((new Date().getTime() - this.lastReset) > threshold && (new Date().getTime() - this.lastScaleUpdate) > threshold);
 
 		if(allowUpdate){
 
@@ -917,9 +917,9 @@ export class ProfileWindowController {
 			if(!isNaN(str)){
 				const value = parseFloat(str);
 				this.rotateAmount = value;
-				$("#potree_profile_rotate_amount").css("background-color", "")
+				$("#potree_profile_rotate_amount").css("background-color", "");
 			}else{
-				$("#potree_profile_rotate_amount").css("background-color", "#ff9999")
+				$("#potree_profile_rotate_amount").css("background-color", "#ff9999");
 			}
 
 		});
@@ -944,7 +944,7 @@ export class ProfileWindowController {
 			for(let i = 0; i < points.length; i++){
 				profile.setPosition(i, rotatedPoints[i]);
 			}
-		}
+		};
 
 		$("#potree_profile_rotate_cw").click( () => {
 			const radians = THREE.Math.degToRad(this.rotateAmount);

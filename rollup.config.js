@@ -14,7 +14,7 @@ export default [
 			resolve(),
 			babel({ babelHelpers: 'bundled' })
 		]
-	},{
+	}, {
 		input: 'src/workers/BinaryDecoderWorker.js',
 		output: {
 			file: 'build/potree/workers/BinaryDecoderWorker.js',
@@ -22,7 +22,7 @@ export default [
 			name: 'Potree',
 			sourcemap: false
 		}
-	},{
+	}, {
 		input: 'src/modules/Loader_1.8/OctreeDecoderWorker.js',
 		output: {
 			file: 'build/potree/workers/OctreeDecoderWorker.js',
@@ -31,4 +31,4 @@ export default [
 			sourcemap: false
 		}
 	}
-]
+];

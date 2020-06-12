@@ -1,4 +1,4 @@
-
+import * as THREE from 'three';
 export class SpotLightHelper extends THREE.Object3D{
 
 	constructor(light, color){
@@ -23,17 +23,17 @@ export class SpotLightHelper extends THREE.Object3D{
 			
 
 			let positions = new Float32Array([
-				+0, +0, +0,     +0, +0, -1,
+				+0, +0, +0, +0, +0, -1,
 
-				+0, +0, +0,     -1, -1, -1,
-				+0, +0, +0,     +1, -1, -1,
-				+0, +0, +0,     +1, +1, -1,
-				+0, +0, +0,     -1, +1, -1,
+				+0, +0, +0, -1, -1, -1,
+				+0, +0, +0, +1, -1, -1,
+				+0, +0, +0, +1, +1, -1,
+				+0, +0, +0, -1, +1, -1,
 
-				-1, -1, -1,     +1, -1, -1,
-				+1, -1, -1,     +1, +1, -1,
-				+1, +1, -1,     -1, +1, -1,
-				-1, +1, -1,     -1, -1, -1,
+				-1, -1, -1, +1, -1, -1,
+				+1, -1, -1, +1, +1, -1,
+				+1, +1, -1, -1, +1, -1,
+				-1, +1, -1, -1, -1, -1,
 			]);
 
 			let geometry = new THREE.BufferGeometry();

@@ -42,11 +42,11 @@ const Tag = new Enum({
 	SOFTWARE: 305,
 	COLOR_MAP: 320,
 	SAMPLE_FORMAT: 339,
-	MODEL_PIXEL_SCALE: 33550,         // [GeoTIFF] TYPE: double   N: 3
-	MODEL_TIEPOINT: 33922,            // [GeoTIFF] TYPE: double   N: 6 * NUM_TIEPOINTS
-	GEO_KEY_DIRECTORY: 34735,         // [GeoTIFF] TYPE: short    N: >= 4
-	GEO_DOUBLE_PARAMS: 34736,         // [GeoTIFF] TYPE: short    N: variable
-	GEO_ASCII_PARAMS: 34737,          // [GeoTIFF] TYPE: ascii    N: variable
+	MODEL_PIXEL_SCALE: 33550, // [GeoTIFF] TYPE: double   N: 3
+	MODEL_TIEPOINT: 33922, // [GeoTIFF] TYPE: double   N: 6 * NUM_TIEPOINTS
+	GEO_KEY_DIRECTORY: 34735, // [GeoTIFF] TYPE: short    N: >= 4
+	GEO_DOUBLE_PARAMS: 34736, // [GeoTIFF] TYPE: short    N: variable
+	GEO_ASCII_PARAMS: 34737, // [GeoTIFF] TYPE: ascii    N: variable
 });
 
 const typeMapping = new Map([
@@ -262,21 +262,21 @@ class Exporter{
 		let [width, height] = [image.width, image.height];
 
 		let ifds = [
-			new IFDEntry(Tag.IMAGE_WIDTH,                Type.SHORT,    1,   null, width),
-			new IFDEntry(Tag.IMAGE_HEIGHT,               Type.SHORT,    1,   null, height),
-			new IFDEntry(Tag.BITS_PER_SAMPLE,            Type.SHORT,    4,   null, new Uint16Array([8, 8, 8, 8])),
-			new IFDEntry(Tag.COMPRESSION,                Type.SHORT,    1,   null, 1),
-			new IFDEntry(Tag.PHOTOMETRIC_INTERPRETATION, Type.SHORT,    1,   null, 2),
-			new IFDEntry(Tag.ORIENTATION,                Type.SHORT,    1,   null, 1),
-			new IFDEntry(Tag.SAMPLES_PER_PIXEL,          Type.SHORT,    1,   null, 4),
-			new IFDEntry(Tag.ROWS_PER_STRIP,             Type.LONG,     1,   null, height),
-			new IFDEntry(Tag.STRIP_BYTE_COUNTS,          Type.LONG,     1,   null, width * height * 3),
-			new IFDEntry(Tag.PLANAR_CONFIGURATION,       Type.SHORT,    1,   null, 1),
-			new IFDEntry(Tag.RESOLUTION_UNIT,            Type.SHORT,    1,   null, 1),
-			new IFDEntry(Tag.SOFTWARE,                   Type.ASCII,    6,   null, "......"),
-			new IFDEntry(Tag.STRIP_OFFSETS,              Type.LONG,     1,   null, null),
-			new IFDEntry(Tag.X_RESOLUTION,               Type.RATIONAL, 1,   null, new Uint32Array([1, 1])),
-			new IFDEntry(Tag.Y_RESOLUTION,               Type.RATIONAL, 1,   null, new Uint32Array([1, 1])),
+			new IFDEntry(Tag.IMAGE_WIDTH, Type.SHORT, 1, null, width),
+			new IFDEntry(Tag.IMAGE_HEIGHT, Type.SHORT, 1, null, height),
+			new IFDEntry(Tag.BITS_PER_SAMPLE, Type.SHORT, 4, null, new Uint16Array([8, 8, 8, 8])),
+			new IFDEntry(Tag.COMPRESSION, Type.SHORT, 1, null, 1),
+			new IFDEntry(Tag.PHOTOMETRIC_INTERPRETATION, Type.SHORT, 1, null, 2),
+			new IFDEntry(Tag.ORIENTATION, Type.SHORT, 1, null, 1),
+			new IFDEntry(Tag.SAMPLES_PER_PIXEL, Type.SHORT, 1, null, 4),
+			new IFDEntry(Tag.ROWS_PER_STRIP, Type.LONG, 1, null, height),
+			new IFDEntry(Tag.STRIP_BYTE_COUNTS, Type.LONG, 1, null, width * height * 3),
+			new IFDEntry(Tag.PLANAR_CONFIGURATION, Type.SHORT, 1, null, 1),
+			new IFDEntry(Tag.RESOLUTION_UNIT, Type.SHORT, 1, null, 1),
+			new IFDEntry(Tag.SOFTWARE, Type.ASCII, 6, null, "......"),
+			new IFDEntry(Tag.STRIP_OFFSETS, Type.LONG, 1, null, null),
+			new IFDEntry(Tag.X_RESOLUTION, Type.RATIONAL, 1, null, new Uint32Array([1, 1])),
+			new IFDEntry(Tag.Y_RESOLUTION, Type.RATIONAL, 1, null, new Uint32Array([1, 1])),
 		];
 
 		if(params.ifdEntries){

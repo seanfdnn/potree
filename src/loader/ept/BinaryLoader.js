@@ -1,3 +1,4 @@
+import * as THREE from 'three';
 import {XHRFactory} from "../../XHRFactory.js";
 
 export class EptBinaryLoader {
@@ -31,8 +32,7 @@ export class EptBinaryLoader {
 
 		try {
 			xhr.send(null);
-		}
-		catch (e) {
+		} catch (e) {
 			console.log('Failed request: ' + e);
 		}
 	}

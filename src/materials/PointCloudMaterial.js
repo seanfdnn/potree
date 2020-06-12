@@ -27,7 +27,7 @@ export class PointCloudMaterial extends THREE.RawShaderMaterial {
 			}else{
 				return b;
 			}
-		}
+		};
 
 		let pointSize = getValid(parameters.size, 1.0);
 		let minSize = getValid(parameters.minSize, 2.0);
@@ -191,13 +191,13 @@ export class PointCloudMaterial extends THREE.RawShaderMaterial {
 		let fsVersionIndex = fs.indexOf("#version ");
 
 		if(vsVersionIndex >= 0){
-			vs = vs.replace(/(#version .*)/, `$1\n${definesString}`)
+			vs = vs.replace(/(#version .*)/, `$1\n${definesString}`);
 		}else{
 			vs = `${definesString}\n${vs}`;
 		}
 
 		if(fsVersionIndex >= 0){
-			fs = fs.replace(/(#version .*)/, `$1\n${definesString}`)
+			fs = fs.replace(/(#version .*)/, `$1\n${definesString}`);
 		}else{
 			fs = `${definesString}\n${fs}`;
 		}
@@ -703,8 +703,8 @@ export class PointCloudMaterial extends THREE.RawShaderMaterial {
 	}
 
 	set elevationRange (value) {
-		let changed = this.uniforms.elevationRange.value[0] !== value[0]
-			|| this.uniforms.elevationRange.value[1] !== value[1];
+		let changed = this.uniforms.elevationRange.value[0] !== value[0] ||
+			this.uniforms.elevationRange.value[1] !== value[1];
 
 		if(changed){
 			this.uniforms.elevationRange.value = value;

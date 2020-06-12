@@ -46,7 +46,7 @@ export class EventDispatcher{
 			listeners[type] = [];
 		}
 
-		if(listeners[type].indexOf(listener) === - 1){
+		if(listeners[type].indexOf(listener) === -1){
 			listeners[type].push( listener );
 		}
 
@@ -56,7 +56,7 @@ export class EventDispatcher{
 
 		const listeners = this._listeners;
 
-		return listeners[type] !== undefined && listeners[type].indexOf(listener) !== - 1;
+		return listeners[type] !== undefined && listeners[type].indexOf(listener) !== -1;
 	}
 
 	removeEventListener(type, listener){
@@ -68,7 +68,7 @@ export class EventDispatcher{
 
 			let index = listenerArray.indexOf(listener);
 
-			if(index !== - 1){
+			if(index !== -1){
 				listenerArray.splice(index, 1);
 			}
 		}

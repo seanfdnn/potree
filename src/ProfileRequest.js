@@ -299,7 +299,7 @@ export class ProfileRequest {
 				let accepted = null;
 				let mileage = null;
 				let acceptedPositions = null;
-				for(let result of this.getAccepted(numPoints, node, matrix, segment, segmentDir, points,totalMileage)){
+				for(let result of this.getAccepted(numPoints, node, matrix, segment, segmentDir, points, totalMileage)){
 					if(!result){
 						let duration = performance.now() - checkpoint;
 						//console.log(`getPointsInsideProfile yield after ${duration}ms`);

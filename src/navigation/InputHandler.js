@@ -432,7 +432,7 @@ export class InputHandler extends EventDispatcher {
 						type: 'drag',
 						drag: this.drag,
 						viewer: this.viewer,
-						consume: () => {dragConsumed = true;}
+						consume: () => { dragConsumed = true; }
 					});
 
 					if(dragConsumed){
