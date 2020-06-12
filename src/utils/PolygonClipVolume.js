@@ -1,3 +1,4 @@
+import * as THREE from 'three';
 
 export class PolygonClipVolume extends THREE.Object3D{
 	

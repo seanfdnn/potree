@@ -1,7 +1,6 @@
 {
 	"extends": "happiness",
 	"globals": {
-		"THREE": false,
 		"TWEEN": false,
 		"$": false,
 		"XMLHttpRequest": false,
@@ -15,7 +14,6 @@
 		"btoa": false,
 		"alert": false,
 		"ol": false,
-		"proj4": false,
 		"shapefile": false,
 		"Worker": false,
 		"Image": false,

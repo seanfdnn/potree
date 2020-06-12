@@ -1,3 +1,4 @@
+import * as THREE from 'three';
 
 
 export class ClipVolume extends THREE.Object3D{
