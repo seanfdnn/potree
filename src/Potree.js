@@ -1,3 +1,4 @@
+export * as THREE from 'three';
 
 export * from "./Actions.js";
 export * from "./AnimationPath.js";
@@ -105,6 +106,8 @@ export const debug = {};
 
 let scriptPath = "";
 
+
+/*
 if (document.currentScript && document.currentScript.src) {
 	scriptPath = new URL(document.currentScript.src + '/..').href;
 	if (scriptPath.slice(-1) === '/') {
@@ -118,6 +121,7 @@ if (document.currentScript && document.currentScript.src) {
 }else {
 	console.error('Potree was unable to find its script path using document.currentScript. Is Potree included with a script tag? Does your browser support this function?');
 }
+*/
 
 let resourcePath = scriptPath + '/resources';
 

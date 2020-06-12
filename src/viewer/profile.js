@@ -1,4 +1,4 @@
-
+import * as THREE from 'three';
 
 import {Utils} from "../utils.js";
 import {Points} from "../Points.js";

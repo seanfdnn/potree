@@ -1,4 +1,4 @@
-
+import * as THREE from 'three';
 
 export class ShapefileLoader{
 
@@ -86,7 +86,7 @@ export class ShapefileLoader{
 			const lineGeometry = new THREE.LineGeometry();
 			lineGeometry.setPositions( coordinates );
 
-			const line = new THREE.Line2( lineGeometry, matLine );
+			const line = new THREE.Line( lineGeometry, matLine );
 			line.computeLineDistances();
 			line.scale.set( 1, 1, 1 );
 			line.position.copy(min);
@@ -120,7 +120,7 @@ export class ShapefileLoader{
 				const lineGeometry = new THREE.LineGeometry();
 				lineGeometry.setPositions( coordinates );
 
-				const line = new THREE.Line2( lineGeometry, matLine );
+				const line = new THREE.Line( lineGeometry, matLine );
 				line.computeLineDistances();
 				line.scale.set( 1, 1, 1 );
 				line.position.copy(min);

@@ -1,3 +1,4 @@
+import * as THREE from 'three';
 
 THREE.PerspectiveCamera.prototype.zoomTo = function (node, factor) {
 	if (!node.geometry && !node.boundingSphere && !node.boundingBox) {

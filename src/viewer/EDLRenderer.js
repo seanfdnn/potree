@@ -1,3 +1,4 @@
+import * as THREE from 'three';
 
 import {PointCloudSM} from "../utils/PointCloudSM.js";
 import {EyeDomeLightingMaterial} from "../materials/EyeDomeLightingMaterial.js";

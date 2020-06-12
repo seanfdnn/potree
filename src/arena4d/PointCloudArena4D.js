@@ -1,4 +1,5 @@
 
+import * as THREE from 'three';
 
 import {PointCloudTree, PointCloudTreeNode} from "../PointCloudTree.js";
 import {PointCloudMaterial} from "../materials/PointCloudMaterial.js";

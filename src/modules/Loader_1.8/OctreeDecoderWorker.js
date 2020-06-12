@@ -1,7 +1,5 @@
 
-
-import {Version} from "../../Version.js";
-import {PointAttributes, PointAttribute} from "../../loader/PointAttributes.js";
+import {PointAttribute} from "../../loader/PointAttributes.js";
 
 /* global onmessage:true postMessage:false */
 /* exported onmessage */

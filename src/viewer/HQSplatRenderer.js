@@ -1,4 +1,4 @@
-
+import * as THREE from 'three';
 
 import {NormalizationMaterial} from "../materials/NormalizationMaterial.js";
 import {NormalizationEDLMaterial} from "../materials/NormalizationEDLMaterial.js";

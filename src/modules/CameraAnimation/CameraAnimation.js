@@ -1,4 +1,4 @@
-
+import * as THREE from 'three';
 import { EventDispatcher } from "../../EventDispatcher.js";
 import { Utils } from "../../utils.js";
 
@@ -232,7 +232,7 @@ export class CameraAnimation extends EventDispatcher{
 		{ // position
 			const geometry = new THREE.LineGeometry();
 
-			let material = new THREE.LineMaterial({ 
+			let material = new THREE.LineBasicMaterial({ 
 				color: 0x00ff00, 
 				dashSize: 5, 
 				gapSize: 2,
@@ -240,7 +240,7 @@ export class CameraAnimation extends EventDispatcher{
 				resolution:  new THREE.Vector2(1000, 1000),
 			});
 
-			const line = new THREE.Line2(geometry, material);
+			const line = new THREE.Line(geometry, material);
 
 			this.line = line;
 			this.node.add(line);
@@ -249,7 +249,7 @@ export class CameraAnimation extends EventDispatcher{
 		{ // target
 			const geometry = new THREE.LineGeometry();
 
-			let material = new THREE.LineMaterial({ 
+			let material = new THREE.LineBasicMaterial({ 
 				color: 0x0000ff, 
 				dashSize: 5, 
 				gapSize: 2,
@@ -257,7 +257,7 @@ export class CameraAnimation extends EventDispatcher{
 				resolution:  new THREE.Vector2(1000, 1000),
 			});
 
-			const line = new THREE.Line2(geometry, material);
+			const line = new THREE.Line(geometry, material);
 
 			this.targetLine = line;
 			this.node.add(line);
@@ -296,17 +296,17 @@ export class CameraAnimation extends EventDispatcher{
 
 		const geometry = new THREE.LineGeometry();
 
-		geometry.setPositions(positions);
+		geometry.setAttribute('position', new THREE.BufferAttribute(positions,3));
 		geometry.verticesNeedUpdate = true;
 		geometry.computeBoundingSphere();
 
-		let material = new THREE.LineMaterial({ 
+		let material = new THREE.LineBasicMaterial({ 
 			color: 0xff0000, 
 			linewidth: 2, 
 			resolution:  new THREE.Vector2(1000, 1000),
 		});
 
-		const line = new THREE.Line2(geometry, material);
+		const line = new THREE.Line(geometry, material);
 		line.computeLineDistances();
 		
 		return line;

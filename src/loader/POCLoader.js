@@ -1,5 +1,4 @@
-
-
+import * as THREE from 'three';
 import {PointCloudOctreeGeometry, PointCloudOctreeGeometryNode} from "../PointCloudOctreeGeometry.js";
 import {Version} from "../Version.js";
 import {XHRFactory} from "../XHRFactory.js";

@@ -1,4 +1,4 @@
-
+import * as THREE from 'three';
 import {Points} from "./Points.js";
 
 export class ProfileData {

@@ -1,4 +1,3 @@
-
 let ftCanvas = document.createElement('canvas');
 
 export const Features = (function () {

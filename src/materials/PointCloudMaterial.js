@@ -1,3 +1,4 @@
+import * as THREE from 'three';
 
 import {Utils} from "../utils.js";
 import {Gradients} from "./Gradients.js";

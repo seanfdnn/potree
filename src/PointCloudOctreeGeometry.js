@@ -1,4 +1,4 @@
-
+import * as THREE from 'three';
 
 import {PointCloudTreeNode} from "./PointCloudTree.js";
 import {XHRFactory} from "./XHRFactory.js";

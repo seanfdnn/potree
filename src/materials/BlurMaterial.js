@@ -1,4 +1,5 @@
 
+import * as THREE from 'three';
 // see http://john-chapman-graphics.blogspot.co.at/2013/01/ssao-tutorial.html
 
 Potree.BlurMaterial = class BlurMaterial extends THREE.ShaderMaterial{

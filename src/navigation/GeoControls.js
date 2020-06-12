@@ -1,4 +1,4 @@
-
+import * as THREE from 'three';
 /**
  * @author mschuetz / http://mschuetz.at
  *

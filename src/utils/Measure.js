@@ -10,7 +10,7 @@ function createHeightLine(){
 		0, 0, 0,
 	]);
 
-	let lineMaterial = new THREE.LineMaterial({ 
+	let lineMaterial = new THREE.LineBasicMaterial({ 
 		color: 0x00ff00, 
 		dashSize: 5, 
 		gapSize: 2,
@@ -19,7 +19,7 @@ function createHeightLine(){
 	});
 
 	lineMaterial.depthTest = false;
-	const heightEdge = new THREE.Line2(lineGeometry, lineMaterial);
+	const heightEdge = new THREE.Line(lineGeometry, lineMaterial);
 	heightEdge.visible = false;
 
 	//this.add(this.heightEdge);
@@ -77,7 +77,7 @@ function createCircleRadiusLine(){
 		0, 0, 0,
 	]);
 
-	const lineMaterial = new THREE.LineMaterial({ 
+	const lineMaterial = new THREE.LineBasicMaterial({ 
 		color: 0xff0000, 
 		linewidth: 2, 
 		resolution:  new THREE.Vector2(1000, 1000),
@@ -87,7 +87,7 @@ function createCircleRadiusLine(){
 
 	lineMaterial.depthTest = false;
 
-	const circleRadiusLine = new THREE.Line2(lineGeometry, lineMaterial);
+	const circleRadiusLine = new THREE.Line(lineGeometry, lineMaterial);
 	circleRadiusLine.visible = false;
 
 	return circleRadiusLine;
@@ -122,7 +122,7 @@ function createCircleLine(){
 	const geometry = new THREE.LineGeometry();
 	geometry.setPositions(coordinates);
 
-	const material = new THREE.LineMaterial({ 
+	const material = new THREE.LineBasicMaterial({ 
 		color: 0xff0000, 
 		dashSize: 5, 
 		gapSize: 2,
@@ -132,7 +132,7 @@ function createCircleLine(){
 
 	material.depthTest = false;
 
-	const circleLine = new THREE.Line2(geometry, material);
+	const circleLine = new THREE.Line(geometry, material);
 	circleLine.visible = false;
 	circleLine.computeLineDistances();
 
@@ -157,7 +157,7 @@ function createLine(){
 		0, 0, 0,
 	]);
 
-	const material = new THREE.LineMaterial({ 
+	const material = new THREE.LineBasicMaterial({ 
 		color: 0xff0000, 
 		linewidth: 2, 
 		resolution:  new THREE.Vector2(1000, 1000),
@@ -167,7 +167,7 @@ function createLine(){
 
 	material.depthTest = false;
 
-	const line = new THREE.Line2(geometry, material);
+	const line = new THREE.Line(geometry, material);
 
 	return line;
 }
@@ -202,7 +202,7 @@ function createCircle(){
 	const geometry = new THREE.LineGeometry();
 	geometry.setPositions(coordinates);
 
-	const material = new THREE.LineMaterial({ 
+	const material = new THREE.LineBasicMaterial({ 
 		color: 0xff0000, 
 		dashSize: 5, 
 		gapSize: 2,
@@ -212,7 +212,7 @@ function createCircle(){
 
 	material.depthTest = false;
 
-	const line = new THREE.Line2(geometry, material);
+	const line = new THREE.Line(geometry, material);
 	line.computeLineDistances();
 
 	return line;
@@ -359,7 +359,7 @@ export class Measure extends THREE.Object3D {
 					0, 0, 0,
 			]);
 
-			let lineMaterial = new THREE.LineMaterial({
+			let lineMaterial = new THREE.LineBasicMaterial({
 				color: 0xff0000, 
 				linewidth: 2, 
 				resolution:  new THREE.Vector2(1000, 1000),
@@ -367,7 +367,7 @@ export class Measure extends THREE.Object3D {
 
 			lineMaterial.depthTest = false;
 
-			let edge = new THREE.Line2(lineGeometry, lineMaterial);
+			let edge = new THREE.Line(lineGeometry, lineMaterial);
 			edge.visible = true;
 
 			this.add(edge);

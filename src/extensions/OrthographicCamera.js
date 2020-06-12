@@ -1,3 +1,4 @@
+import * as THREE from 'three';
 
 THREE.OrthographicCamera.prototype.zoomTo = function( node, factor = 1){
 

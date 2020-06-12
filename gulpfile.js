@@ -19,21 +19,12 @@ let paths = {
 		"build/workers/laslaz-worker.js",
 		"build/workers/lasdecoder-worker.js",
 	],
-	html: [
-		"src/viewer/potree.css",
-		"src/viewer/sidebar.html",
-		"src/viewer/profile.html"
-	],
 	resources: [
 		"resources/**/*"
 	]
 };
 
 let workers = {
-	"LASLAZWorker": [
-		"libs/plasio/workers/laz-perf.js",
-		"libs/plasio/workers/laz-loader-worker.js"
-	],
 	"LASDecoderWorker": [
 		"src/workers/LASDecoderWorker.js"
 	],
@@ -158,8 +149,6 @@ gulp.task('build',
 	gulp.series(
 		gulp.parallel("workers", "lazylibs", "shaders", "icons_viewer", "examples_page"),
 		async function(done){
-			gulp.src(paths.html).pipe(gulp.dest('build/potree'));
-
 			gulp.src(paths.resources).pipe(gulp.dest('build/potree/resources'));
 
 			gulp.src(["LICENSE"]).pipe(gulp.dest('build/potree'));

@@ -1,4 +1,4 @@
-
+import * as THREE from 'three';
 export class PotreeRenderer {
 
 	constructor (viewer) {

@@ -1,4 +1,4 @@
-
+import * as THREE from 'three';
 import {PointAttribute, PointAttributes, PointAttributeTypes} from "../../loader/PointAttributes.js";
 import {OctreeGeometry, OctreeGeometryNode} from "./OctreeGeometry.js";
 

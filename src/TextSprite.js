@@ -1,4 +1,4 @@
-
+import * as THREE from 'three';
 
 // /**
 //  * adapted from http://stemkoski.github.io/Three.js/Sprite-Text-Labels.html
