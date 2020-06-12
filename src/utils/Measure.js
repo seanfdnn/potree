@@ -1,16 +1,18 @@
-
+import { Line2 } from 'three/examples/jsm/lines/Line2.js';
+import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial.js';
+import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry.js';
 import {TextSprite} from "../TextSprite.js";
 import {Utils} from "../utils.js";
 
 function createHeightLine(){
-	let lineGeometry = new THREE.LineGeometry();
+	let lineGeometry = new LineGeometry();
 
 	lineGeometry.setPositions([
 		0, 0, 0,
 		0, 0, 0,
 	]);
 
-	let lineMaterial = new THREE.LineBasicMaterial({ 
+	let lineMaterial = new LineMaterial({ 
 		color: 0x00ff00, 
 		dashSize: 5, 
 		gapSize: 2,
@@ -19,7 +21,7 @@ function createHeightLine(){
 	});
 
 	lineMaterial.depthTest = false;
-	const heightEdge = new THREE.Line(lineGeometry, lineMaterial);
+	const heightEdge = new Line2(lineGeometry, lineMaterial);
 	heightEdge.visible = false;
 
 	//this.add(this.heightEdge);
@@ -77,7 +79,7 @@ function createCircleRadiusLine(){
 		0, 0, 0,
 	]);
 
-	const lineMaterial = new THREE.LineBasicMaterial({ 
+	const lineMaterial = new LineMaterial({ 
 		color: 0xff0000, 
 		linewidth: 2, 
 		resolution:  new THREE.Vector2(1000, 1000),
@@ -87,7 +89,7 @@ function createCircleRadiusLine(){
 
 	lineMaterial.depthTest = false;
 
-	const circleRadiusLine = new THREE.Line(lineGeometry, lineMaterial);
+	const circleRadiusLine = new Line2(lineGeometry, lineMaterial);
 	circleRadiusLine.visible = false;
 
 	return circleRadiusLine;
@@ -119,10 +121,10 @@ function createCircleLine(){
 		);
 	}
 
-	const geometry = new THREE.LineGeometry();
+	const geometry = new LineGeometry();
 	geometry.setPositions(coordinates);
 
-	const material = new THREE.LineBasicMaterial({ 
+	const material = new LineMaterial({ 
 		color: 0xff0000, 
 		dashSize: 5, 
 		gapSize: 2,
@@ -132,7 +134,7 @@ function createCircleLine(){
 
 	material.depthTest = false;
 
-	const circleLine = new THREE.Line(geometry, material);
+	const circleLine = new Line2(geometry, material);
 	circleLine.visible = false;
 	circleLine.computeLineDistances();
 
@@ -157,7 +159,7 @@ function createLine(){
 		0, 0, 0,
 	]);
 
-	const material = new THREE.LineBasicMaterial({ 
+	const material = new LineMaterial({ 
 		color: 0xff0000, 
 		linewidth: 2, 
 		resolution:  new THREE.Vector2(1000, 1000),
@@ -167,7 +169,7 @@ function createLine(){
 
 	material.depthTest = false;
 
-	const line = new THREE.Line(geometry, material);
+	const line = new Line2(geometry, material);
 
 	return line;
 }
@@ -199,10 +201,10 @@ function createCircle(){
 		);
 	}
 
-	const geometry = new THREE.LineGeometry();
+	const geometry = new LineGeometry();
 	geometry.setPositions(coordinates);
 
-	const material = new THREE.LineBasicMaterial({ 
+	const material = new LineMaterial({ 
 		color: 0xff0000, 
 		dashSize: 5, 
 		gapSize: 2,
@@ -212,7 +214,7 @@ function createCircle(){
 
 	material.depthTest = false;
 
-	const line = new THREE.Line(geometry, material);
+	const line = new Line2(geometry, material);
 	line.computeLineDistances();
 
 	return line;
@@ -353,13 +355,13 @@ export class Measure extends THREE.Object3D {
 		this.spheres.push(sphere);
 
 		{ // edges
-			let lineGeometry = new THREE.LineGeometry();
+			let lineGeometry = new LineGeometry();
 			lineGeometry.setPositions( [
 					0, 0, 0,
 					0, 0, 0,
 			]);
 
-			let lineMaterial = new THREE.LineBasicMaterial({
+			let lineMaterial = new LineMaterial({
 				color: 0xff0000, 
 				linewidth: 2, 
 				resolution:  new THREE.Vector2(1000, 1000),
@@ -367,7 +369,7 @@ export class Measure extends THREE.Object3D {
 
 			lineMaterial.depthTest = false;
 
-			let edge = new THREE.Line(lineGeometry, lineMaterial);
+			let edge = new Line2(lineGeometry, lineMaterial);
 			edge.visible = true;
 
 			this.add(edge);

@@ -1,4 +1,7 @@
 import * as THREE from 'three';
+import { Line2 } from 'three/examples/jsm/lines/Line2.js';
+import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial.js';
+import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry.js';
 
 export class ShapefileLoader{
 
@@ -8,7 +11,7 @@ export class ShapefileLoader{
 
 	async load(path){
 
-		const matLine = new THREE.LineMaterial( {
+		const matLine = new LineMaterial( {
 			color: 0xff0000,
 			linewidth: 3, // in pixels
 			resolution:  new THREE.Vector2(1000, 1000),
@@ -83,10 +86,10 @@ export class ShapefileLoader{
 				coordinates[i+2] -= min.z;
 			}
 			
-			const lineGeometry = new THREE.LineGeometry();
+			const lineGeometry = new LineGeometry();
 			lineGeometry.setPositions( coordinates );
 
-			const line = new THREE.Line( lineGeometry, matLine );
+			const line = new Line2( lineGeometry, matLine );
 			line.computeLineDistances();
 			line.scale.set( 1, 1, 1 );
 			line.position.copy(min);
@@ -117,10 +120,10 @@ export class ShapefileLoader{
 					coordinates[i+2] -= min.z;
 				}
 
-				const lineGeometry = new THREE.LineGeometry();
+				const lineGeometry = new LineGeometry();
 				lineGeometry.setPositions( coordinates );
 
-				const line = new THREE.Line( lineGeometry, matLine );
+				const line = new Line2( lineGeometry, matLine );
 				line.computeLineDistances();
 				line.scale.set( 1, 1, 1 );
 				line.position.copy(min);
