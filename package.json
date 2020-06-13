@@ -21,21 +21,27 @@
     "build": "gulp build pack"
   },
   "dependencies": {
-    "@ngageoint/geopackage": "^2.1.4",
+    "@babel/plugin-transform-runtime": "^7.10.1",
+    "@babel/runtime": "^7.10.2",
+    "@tweenjs/tween.js": "^18.5.0",
+    "core-js": "3",
     "d3": "^5.16.0",
     "i18next": "^19.4.5",
+    "jquery": "^3.5.1",
     "ol": "^6.3.1",
-    "plasio": "https://github.com/verma/plasio.git",
     "proj4": "^2.6.2",
     "shapefile": "^0.6.6",
     "stats.js": "^0.17.0",
-    "three": "^0.117.1",
-    "tweenjs": "^1.0.2"
+    "three": "^0.117.1"
   },
+  "browserslist": [
+    "last 1 Chrome version"
+  ],
   "author": "Markus Schütz",
   "license": "BSD-2-CLAUSE",
   "devDependencies": {
     "@babel/core": "^7.10.2",
+    "@babel/plugin-transform-async-to-generator": "^7.10.1",
     "@babel/preset-env": "^7.10.2",
     "@rollup/plugin-babel": "^5.0.3",
     "@rollup/plugin-node-resolve": "^8.0.1",

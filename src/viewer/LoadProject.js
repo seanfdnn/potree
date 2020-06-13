@@ -56,7 +56,7 @@ function loadPointCloud(viewer, data){
 			return;
 		}
 
-		Potree.loadPointCloud(data.url, data.name, (e) => {
+		exports.loadPointCloud(data.url, data.name, (e) => {
 			const {pointcloud} = e;
 
 			pointcloud.position.set(...data.position);
@@ -161,7 +161,7 @@ function loadOrientedImages(viewer, images){
 		return;
 	}
 
-	Potree.OrientedImageLoader.load(cameraParamsPath, imageParamsPath, viewer).then( images => {
+	exports.OrientedImageLoader.load(cameraParamsPath, imageParamsPath, viewer).then( images => {
 		viewer.scene.addOrientedImages(images);
 	});
 
@@ -185,7 +185,7 @@ function loadGeopackage(viewer, geopackage){
 		transform: transform,
 	};
 
-	Potree.GeoPackageLoader.loadUrl(path, params).then(data => {
+	exports.GeoPackageLoader.loadUrl(path, params).then(data => {
 		viewer.scene.addGeopackage(data);
 	});
 	
@@ -304,7 +304,7 @@ function loadProfile(viewer, data){
 		return;
 	}
 
-	let profile = new Potree.Profile();
+	let profile = new exports.Profile();
 	profile.name = name;
 	profile.uuid = data.uuid;
 

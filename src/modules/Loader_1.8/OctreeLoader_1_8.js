@@ -15,7 +15,7 @@ export class NodeLoader{
 		}
 
 		node.loading = true;
-		Potree.numNodesLoading++;
+		exports.numNodesLoading++;
 
 		if(node.nodeType === 2){
 			await this.loadHierarchy(node);
@@ -39,15 +39,15 @@ export class NodeLoader{
 
 			let buffer = await response.arrayBuffer();
 
-			let workerPath = Potree.scriptPath + '/workers/OctreeDecoderWorker.js';
-			let worker = Potree.workerPool.getWorker(workerPath);
+			let workerPath = exports.scriptPath + '/workers/OctreeDecoderWorker.js';
+			let worker = exports.workerPool.getWorker(workerPath);
 
 			worker.onmessage = function (e) {
 
 				let data = e.data;
 				let buffers = data.attributeBuffers;
 
-				Potree.workerPool.returnWorker(workerPath, worker);
+				exports.workerPool.returnWorker(workerPath, worker);
 
 				let geometry = new THREE.BufferGeometry();
 				
@@ -71,7 +71,7 @@ export class NodeLoader{
 				node.geometry = geometry;
 				node.loaded = true;
 				node.loading = false;
-				Potree.numNodesLoading--;
+				exports.numNodesLoading--;
 			};
 
 			let pointAttributes = node.octreeGeometry.pointAttributes;
@@ -95,7 +95,7 @@ export class NodeLoader{
 		}catch(e){
 			node.loaded = false;
 			node.loading = false;
-			Potree.numNodesLoading--;
+			exports.numNodesLoading--;
 
 			console.log(`failed to load ${node.name}`);
 			console.log(`trying again!`);

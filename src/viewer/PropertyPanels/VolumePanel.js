@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import $ from  "jquery";
 
 import {Utils} from "../../utils.js";
 import {BoxVolume, SphereVolume} from "../../utils/Volume.js";
@@ -9,8 +10,8 @@ export class VolumePanel extends MeasurePanel{
 	constructor(viewer, measurement, propertiesPanel){
 		super(viewer, measurement, propertiesPanel);
 
-		let copyIconPath = Potree.resourcePath + '/icons/copy.svg';
-		let removeIconPath = Potree.resourcePath + '/icons/remove.svg';
+		let copyIconPath = exports.resourcePath + '/icons/copy.svg';
+		let removeIconPath = exports.resourcePath + '/icons/remove.svg';
 
 		let lblLengthText = new Map([
 			[BoxVolume, "length"],

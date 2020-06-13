@@ -809,30 +809,6 @@ export class Utils {
 
 	}
 
-	static getMeasurementIcon(measurement){
-		if (measurement instanceof Measure) {
-			if (measurement.showDistances && !measurement.showArea && !measurement.showAngles) {
-				return `${Potree.resourcePath}/icons/distance.svg`;
-			} else if (measurement.showDistances && measurement.showArea && !measurement.showAngles) {
-				return `${Potree.resourcePath}/icons/area.svg`;
-			} else if (measurement.maxMarkers === 1) {
-				return `${Potree.resourcePath}/icons/point.svg`;
-			} else if (!measurement.showDistances && !measurement.showArea && measurement.showAngles) {
-				return `${Potree.resourcePath}/icons/angle.png`;
-			} else if (measurement.showHeight) {
-				return `${Potree.resourcePath}/icons/height.svg`;
-			} else {
-				return `${Potree.resourcePath}/icons/distance.svg`;
-			}
-		} else if (measurement instanceof Profile) {
-			return `${Potree.resourcePath}/icons/profile.svg`;
-		} else if (measurement instanceof Volume) {
-			return `${Potree.resourcePath}/icons/volume.svg`;
-		} else if (measurement instanceof PolygonClipVolume) {
-			return `${Potree.resourcePath}/icons/clip-polygon.svg`;
-		}
-	}
-
 	static lineToLineIntersection(P0, P1, P2, P3){
 
 		const P = [P0, P1, P2, P3];

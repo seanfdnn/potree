@@ -208,7 +208,7 @@ export class Images360 extends EventDispatcher{
 		let camera = viewer.scene.getActiveCamera();
 		let domElement = viewer.renderer.domElement;
 
-		let ray = Potree.Utils.mouseToRay(mouse, camera, domElement.clientWidth, domElement.clientHeight);
+		let ray = exports.Utils.mouseToRay(mouse, camera, domElement.clientWidth, domElement.clientHeight);
 
 		raycaster.ray.copy(ray);
 		let intersections = raycaster.intersectObjects(this.node.children);

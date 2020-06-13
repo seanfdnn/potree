@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import TWEEN from '@tweenjs/tween.js';
-
+import $ from  "jquery";
 
 import {Action} from "./Actions.js";
 import {Utils} from "./utils.js";
@@ -45,7 +45,6 @@ export class Annotation extends EventDispatcher {
 		this.parent = null;
 		this.boundingBox = new THREE.Box3();
 
-		let iconClose = exports.resourcePath + '/icons/close.svg';
 
 		this.domElement = $(`
 			<div class="annotation" oncontextmenu="return false;">
@@ -54,7 +53,7 @@ export class Annotation extends EventDispatcher {
 				</div>
 				<div class="annotation-description">
 					<span class="annotation-description-close">
-						<img src="${iconClose}" width="16px">
+						<img width="16px">
 					</span>
 					<span class="annotation-description-content">${this._description}</span>
 				</div>

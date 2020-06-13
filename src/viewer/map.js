@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import proj4 from 'proj4';
+import $ from  "jquery";
 import ol from 'ol';
 // http://epsg.io/
 proj4.defs([

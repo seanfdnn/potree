@@ -4,17 +4,20 @@ export default [
 	{
 		input: 'src/Potree.js',
 		treeshake: false,
+		external: ['jquery', 'stats.js', 'ol'],
 		output: {
 			file: 'build/potree/potree.js',
-			format: 'es',
+			format: 'umd',
 			name: 'Potree',
-			sourcemap: true,
+			sourcemap: false,
+			globals: {
+				jquery: '$'
+			}
 		},
 		plugins: [
 			resolve(),
 			babel({ babelHelpers: 'bundled' })
 		],
-		external: ['stats.js', 'ol'],
 	}, {
 		input: 'src/workers/BinaryDecoderWorker.js',
 		output: {

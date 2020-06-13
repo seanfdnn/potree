@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import {ClipTask, ClipMethod} from "./defines.js";
 import {Box3Helper} from "./utils/Box3Helper.js";
-import BinaryHeap from "../libs/other/BinaryHeap";
+import {BinaryHeap} from "../libs/other/BinaryHeap";
 
 export function updatePointClouds(pointclouds, camera, renderer){
 
@@ -122,10 +122,10 @@ export function updateVisibility(pointclouds, camera, renderer){
 
 	// check if pointcloud has been transformed
 	// some code will only be executed if changes have been detected
-	if(!Potree._pointcloudTransformVersion){
-		Potree._pointcloudTransformVersion = new Map();
+	if(!exports._pointcloudTransformVersion){
+		exports._pointcloudTransformVersion = new Map();
 	}
-	let pointcloudTransformVersion = Potree._pointcloudTransformVersion;
+	let pointcloudTransformVersion = exports._pointcloudTransformVersion;
 	for(let pointcloud of pointclouds){
 
 		if(!pointcloud.visible){
@@ -274,7 +274,7 @@ export function updateVisibility(pointclouds, camera, renderer){
 			lowestSpacing = Math.min(lowestSpacing, node.geometryNode.spacing);
 		}
 
-		if (numVisiblePoints + node.getNumPoints() > Potree.pointBudget) {
+		if (numVisiblePoints + node.getNumPoints() > exports.pointBudget) {
 			break;
 		}
 
@@ -384,14 +384,14 @@ export function updateVisibility(pointclouds, camera, renderer){
 	{ // update DEM
 		let maxDEMLevel = 4;
 		let candidates = pointclouds
-			.filter(p => (p.generateDEM && p.dem instanceof Potree.DEM));
+			.filter(p => (p.generateDEM && p.dem instanceof exports.DEM));
 		for (let pointcloud of candidates) {
 			let updatingNodes = pointcloud.visibleNodes.filter(n => n.getLevel() <= maxDEMLevel);
 			pointcloud.dem.update(updatingNodes);
 		}
 	}
 
-	for (let i = 0; i < Math.min(Potree.maxNodesLoading, unloadedGeometry.length); i++) {
+	for (let i = 0; i < Math.min(exports.maxNodesLoading, unloadedGeometry.length); i++) {
 		unloadedGeometry[i].load();
 	}
 

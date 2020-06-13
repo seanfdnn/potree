@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import * as d3 from 'd3';
+import $ from  "jquery";
 
 import {Utils} from "../utils.js";
 import {Points} from "../Points.js";

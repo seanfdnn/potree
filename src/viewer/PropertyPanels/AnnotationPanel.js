@@ -1,3 +1,4 @@
+import $ from  "jquery";
 
 import {Utils} from "../../utils.js";
 
@@ -9,7 +10,7 @@ export class AnnotationPanel{
 
 		this._update = () => { this.update(); };
 
-		let copyIconPath = `${Potree.resourcePath}/icons/copy.svg`;
+		let copyIconPath = `${exports.resourcePath}/icons/copy.svg`;
 		this.elContent = $(`
 		<div class="propertypanel_content">
 			<table>

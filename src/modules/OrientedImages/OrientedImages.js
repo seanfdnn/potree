@@ -473,8 +473,6 @@ export class OrientedImageLoader{
 		images.imageParams = imageParams;
 		images.images = orientedImages;
 
-		Potree.debug.moveToImage = moveToImage;
-
 		return images;
 	}
 }

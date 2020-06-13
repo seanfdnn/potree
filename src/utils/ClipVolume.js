@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import $ from  "jquery";
 
 
 export class ClipVolume extends THREE.Object3D{

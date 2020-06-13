@@ -2,7 +2,7 @@
 import * as THREE from 'three';
 // see http://john-chapman-graphics.blogspot.co.at/2013/01/ssao-tutorial.html
 
-Potree.BlurMaterial = class BlurMaterial extends THREE.ShaderMaterial{
+exports.BlurMaterial = class BlurMaterial extends THREE.ShaderMaterial{
 
 	constructor(parameters = {}){
 		super();
@@ -17,8 +17,8 @@ Potree.BlurMaterial = class BlurMaterial extends THREE.ShaderMaterial{
 
 		this.setValues({
 			uniforms: uniforms,
-			vertexShader: Potree.Shaders['blur.vs'],
-			fragmentShader: Potree.Shaders['blur.fs']
+			vertexShader: exports.Shaders['blur.vs'],
+			fragmentShader: exports.Shaders['blur.fs']
 		});
 	}
 };

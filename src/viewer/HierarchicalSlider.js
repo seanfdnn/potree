@@ -1,3 +1,4 @@
+import $ from  "jquery";
 
 function addCommas(nStr){
 	nStr += '';

@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import $ from  "jquery";
 
 import {ClipVolume} from "./ClipVolume.js";
 import {PolygonClipVolume} from "./PolygonClipVolume.js";

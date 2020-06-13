@@ -195,13 +195,13 @@ export class EDLRenderer{
 		const visiblePointClouds = viewer.scene.pointclouds.filter(pc => pc.visible);
 
 		if(this.screenshot){
-			let oldBudget = Potree.pointBudget;
-			Potree.pointBudget = Math.max(10 * 1000 * 1000, 2 * oldBudget);
-			Potree.updatePointClouds(
+			let oldBudget = exports.pointBudget;
+			exports.pointBudget = Math.max(10 * 1000 * 1000, 2 * oldBudget);
+			exports.updatePointClouds(
 				viewer.scene.pointclouds, 
 				camera, 
 				viewer.renderer);
-			Potree.pointBudget = oldBudget;
+			exports.pointBudget = oldBudget;
 		}
 
 		let lights = [];

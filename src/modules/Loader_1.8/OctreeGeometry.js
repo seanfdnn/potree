@@ -65,7 +65,7 @@ export class OctreeGeometryNode{
 
 	load(){
 
-		if (Potree.numNodesLoading >= Potree.maxNodesLoading) {
+		if (exports.numNodesLoading >= exports.maxNodesLoading) {
 			return;
 		}
 

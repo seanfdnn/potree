@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import TWEEN from '@tweenjs/tween.js';
 import i18n from 'i18next';
 import { Stats } from 'stats.js';
+import $ from "jquery";
 
 import {ClipTask, ClipMethod, CameraMode, LengthUnits, ElevationGradientRepeat} from "../defines.js";
 import {Renderer} from "../PotreeRenderer.js";
@@ -13,16 +14,15 @@ import {ClippingTool} from "../utils/ClippingTool.js";
 import {TransformationTool} from "../utils/TransformationTool.js";
 import {Utils} from "../utils.js";
 import {MapView} from "./map.js";
-import {ProfileWindow, ProfileWindowController} from "./profile.js";
+//import {ProfileWindow, ProfileWindowController} from "./profile.js";
 import {BoxVolume} from "../utils/Volume.js";
 import {Features} from "../Features.js";
-import {Message} from "../utils/Message.js";
-import {Sidebar} from "./sidebar.js";
+//import {Sidebar} from "./sidebar.js";
 
-import {AnnotationTool} from "../utils/AnnotationTool.js";
-import {MeasuringTool} from "../utils/MeasuringTool.js";
-import {ProfileTool} from "../utils/ProfileTool.js";
-import {VolumeTool} from "../utils/VolumeTool.js";
+//import {AnnotationTool} from "../utils/AnnotationTool.js";
+//import {MeasuringTool} from "../utils/MeasuringTool.js";
+//import {ProfileTool} from "../utils/ProfileTool.js";
+//import {VolumeTool} from "../utils/VolumeTool.js";
 
 import {InputHandler} from "../navigation/InputHandler.js";
 import {NavigationCube} from "./NavigationCube.js";
@@ -47,11 +47,6 @@ export class Viewer extends EventDispatcher{
 		this.onVrListeners = [];
 
 		this.messages = [];
-		this.elMessages = $(`
-		<div id="message_listing" 
-			style="position: absolute; z-index: 1000; left: 10px; bottom: 10px">
-		</div>`);
-		$(domElement).append(this.elMessages);
 		
 		try{
 
@@ -257,10 +252,10 @@ export class Viewer extends EventDispatcher{
 
 		this.loadGUI = this.loadGUI.bind(this);
 
-		this.annotationTool = new AnnotationTool(this);
-		this.measuringTool = new MeasuringTool(this);
-		this.profileTool = new ProfileTool(this);
-		this.volumeTool = new VolumeTool(this);
+		//this.annotationTool = new AnnotationTool(this);
+		//this.measuringTool = new MeasuringTool(this);
+		//this.profileTool = new ProfileTool(this);
+		//this.volumeTool = new VolumeTool(this);
 
 		}catch(e){
 			this.onCrash(e);
@@ -398,7 +393,7 @@ export class Viewer extends EventDispatcher{
 		}
 
 		if(bg === "skybox"){
-			this.skybox = Utils.loadSkybox(new URL(Potree.resourcePath + '/textures/skybox2/').href);
+			this.skybox = Utils.loadSkybox(new URL(exports.resourcePath + '/textures/skybox2/').href);
 		}
 
 		this.background = bg;
@@ -499,14 +494,14 @@ export class Viewer extends EventDispatcher{
 	}
 
 	setPointBudget (value) {
-		if (Potree.pointBudget !== value) {
-			Potree.pointBudget = parseInt(value);
+		if (exports.pointBudget !== value) {
+			exports.pointBudget = parseInt(value);
 			this.dispatchEvent({'type': 'point_budget_changed', 'viewer': this});
 		}
 	};
 
 	getPointBudget () {
-		return Potree.pointBudget;
+		return exports.pointBudget;
 	};
 
 	setShowAnnotations (value) {
@@ -775,7 +770,7 @@ export class Viewer extends EventDispatcher{
 	};
 
 	moveToGpsTimeVicinity(time){
-		const result = Potree.Utils.findClosestGpsTime(time, viewer);
+		const result = exports.Utils.findClosestGpsTime(time, viewer);
 
 		const box = result.node.pointcloud.deepestNodeAt(result.position).getBoundingBox();
 		const diameter = box.min.distanceTo(box.max);
@@ -928,14 +923,14 @@ export class Viewer extends EventDispatcher{
 		// const json = JSON.parse(text);
 
 		if(json.type === "Potree"){
-			Potree.loadProject(viewer, json);
+			exports.loadProject(viewer, json);
 		}
 
-		//Potree.loadProject(this, url);
+		//exports.loadProject(this, url);
 	}
 
 	saveProject(){
-		return Potree.saveProject(this);
+		return exports.saveProject(this);
 	}
 	
 	loadSettingsFromURL(){
@@ -1113,17 +1108,17 @@ export class Viewer extends EventDispatcher{
 
 		let viewer = this;
 		let sidebarContainer = $('#potree_sidebar_container');
-		sidebarContainer.load(new URL(Potree.scriptPath + '/sidebar.html').href, () => {
+		sidebarContainer.load(new URL(exports.scriptPath + '/sidebar.html').href, () => {
 			sidebarContainer.css('width', '300px');
 			sidebarContainer.css('height', '100%');
 
 			let imgMenuToggle = document.createElement('img');
-			imgMenuToggle.src = new URL(Potree.resourcePath + '/icons/menu_button.svg').href;
+			imgMenuToggle.src = new URL(exports.resourcePath + '/icons/menu_button.svg').href;
 			imgMenuToggle.onclick = this.toggleSidebar;
 			imgMenuToggle.classList.add('potree_menu_toggle');
 
 			let imgMapToggle = document.createElement('img');
-			imgMapToggle.src = new URL(Potree.resourcePath + '/icons/map_icon.png').href;
+			imgMapToggle.src = new URL(exports.resourcePath + '/icons/map_icon.png').href;
 			imgMapToggle.style.display = 'none';
 			imgMapToggle.onclick = e => { this.toggleMap(); };
 			imgMapToggle.id = 'potree_map_toggle';
@@ -1136,7 +1131,7 @@ export class Viewer extends EventDispatcher{
 
 			i18n.init({
 				lng: 'en',
-				resGetPath: Potree.resourcePath + '/lang/__lng__/__ns__.json',
+				resGetPath: exports.resourcePath + '/lang/__lng__/__ns__.json',
 				preload: ['en', 'fr', 'de', 'jp', 'se', 'es'],
 				getAsync: true,
 				debug: false
@@ -1147,39 +1142,14 @@ export class Viewer extends EventDispatcher{
 
 			$(() => {
 				//initSidebar(this);
-				let sidebar = new Sidebar(this);
-				sidebar.init();
+				//let sidebar = new Sidebar(this);
+				//sidebar.init();
 
-				this.sidebar = sidebar;
+				//this.sidebar = sidebar;
 
 				//if (callback) {
 				//	$(callback);
 				//}
-
-				let elProfile = $('<div>').load(new URL(Potree.scriptPath + '/profile.html').href, () => {
-					$(document.body).append(elProfile.children());
-					this.profileWindow = new ProfileWindow(this);
-					this.profileWindowController = new ProfileWindowController(this);
-
-					$('#profile_window').draggable({
-						handle: $('#profile_titlebar'),
-						containment: $(document.body)
-					});
-					$('#profile_window').resizable({
-						containment: $(document.body),
-						handles: 'n, e, s, w'
-					});
-
-					$(() => {
-						this.guiLoaded = true;
-						for(let task of this.guiLoadTasks){
-							task();
-						}
-
-					});
-				});
-
-				
 
 			});
 
@@ -1226,7 +1196,7 @@ export class Viewer extends EventDispatcher{
 						const json = JSON.parse(text);
 
 						if(json.type === "Potree"){
-							Potree.loadProject(viewer, json);
+							exports.loadProject(viewer, json);
 						}
 					}catch(e){
 						console.error("failed to parse the dropped file as JSON");
@@ -1474,14 +1444,14 @@ export class Viewer extends EventDispatcher{
 
 	update(delta, timestamp){
 
-		if(Potree.measureTimings) performance.mark("update-start");
+		if(exports.measureTimings) performance.mark("update-start");
 
 		
 		const scene = this.scene;
 		const camera = scene.getActiveCamera();
 		const visiblePointClouds = this.scene.pointclouds.filter(pc => pc.visible);
 		
-		Potree.pointLoadLimit = Potree.pointBudget * 2;
+		exports.pointLoadLimit = exports.pointBudget * 2;
 
 		const lTarget = camera.position.clone().add(camera.getWorldDirection(new THREE.Vector3()).multiplyScalar(1000));
 		this.scene.directionalLight.position.copy(camera.position);
@@ -1530,7 +1500,7 @@ export class Viewer extends EventDispatcher{
 		}
 
 		if (!this.freeze) {
-			let result = Potree.updatePointClouds(scene.pointclouds, camera, this.renderer);
+			let result = exports.updatePointClouds(scene.pointclouds, camera, this.renderer);
 
 
 			// DEBUG - ONLY DISPLAY NODES THAT INTERSECT MOUSE
@@ -1585,8 +1555,8 @@ export class Viewer extends EventDispatcher{
 			// });
 			// const duration = (performance.now() - tStart).toFixed(2);
 
-			// Potree.debug.computeNearDuration = duration;
-			// Potree.debug.numNodes = numNodes;
+			// exports.debug.computeNearDuration = duration;
+			// exports.debug.numNodes = numNodes;
 
 			//console.log(lowestDistance.toString(2), duration);
 
@@ -1740,14 +1710,14 @@ export class Viewer extends EventDispatcher{
 			delta: delta,
 			timestamp: timestamp});
 			
-		if(Potree.measureTimings) {
+		if(exports.measureTimings) {
 			performance.mark("update-end");
 			performance.measure("update", "update-start", "update-end");
 		}
 	}
 	
 	render(){
-		if(Potree.measureTimings) performance.mark("render-start");
+		if(exports.measureTimings) performance.mark("render-start");
 
 		try{
 
@@ -1936,14 +1906,14 @@ export class Viewer extends EventDispatcher{
 			this.onCrash(e);
 		}
 		
-		if(Potree.measureTimings){
+		if(exports.measureTimings){
 			performance.mark("render-end");
 			performance.measure("render", "render-start", "render-end");
 		}
 	}
 
 	resolveTimings(timestamp){
-		if(Potree.measureTimings){
+		if(exports.measureTimings){
 			if(!this.toggle){
 				this.toggle = timestamp;
 			}
@@ -1977,7 +1947,7 @@ export class Viewer extends EventDispatcher{
 					group.max = Math.max(group.max, measure.duration);
 				}
 
-				let glQueries = Potree.resolveQueries(this.renderer.getContext());
+				let glQueries = exports.resolveQueries(this.renderer.getContext());
 				for(let [key, value] of glQueries){
 
 					let group = {
@@ -2085,7 +2055,7 @@ export class Viewer extends EventDispatcher{
 			this.stats.begin();
 		}
 
-		if(Potree.measureTimings){
+		if(exports.measureTimings){
 			performance.mark("loop-start");
 		}
 
@@ -2113,14 +2083,14 @@ export class Viewer extends EventDispatcher{
 		}
 
 
-		if(Potree.measureTimings){
+		if(exports.measureTimings){
 			performance.mark("loop-end");
 			performance.measure("loop", "loop-start", "loop-end");
 		}
 		
 		this.resolveTimings(timestamp);
 
-		Potree.framenumber++;
+		exports.framenumber++;
 
 		if(this.stats){
 			this.stats.end();
@@ -2136,37 +2106,6 @@ export class Viewer extends EventDispatcher{
 	}
 
 	postMessage(content, params = {}){
-		let message = new Message(content);
-
-		let animationDuration = 100;
-
-		message.element.css("display", "none");
-		message.elClose.click( () => {
-			message.element.slideToggle(animationDuration);
-
-			let index = this.messages.indexOf(message);
-			if(index >= 0){
-				this.messages.splice(index, 1);
-			}
-		});
-
-		this.elMessages.prepend(message.element);
-
-		message.element.slideToggle(animationDuration);
-
-		this.messages.push(message);
-
-		if(params.duration !== undefined){
-			let fadeDuration = 500;
-			let slideOutDuration = 200;
-			setTimeout(() => {
-				message.element.animate({
-					opacity: 0	
-				}, fadeDuration);
-				message.element.slideToggle(slideOutDuration);
-			}, params.duration);
-		}
-
 		return message;
 	}
 };

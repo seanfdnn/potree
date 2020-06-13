@@ -49,7 +49,7 @@ export class PointCloudEptGeometry {
 		this.offset = U.toVector3([0, 0, 0]);
 		this.boundingSphere = U.sphereFrom(this.boundingBox);
 		this.tightBoundingSphere = U.sphereFrom(this.tightBoundingBox);
-		this.version = new Potree.Version('1.7');
+		this.version = new exports.Version('1.7');
 
 		this.projection = null;
 		this.fallbackProjection = null;
@@ -86,12 +86,8 @@ export class PointCloudEptGeometry {
 			(this.boundingBox.max.x - this.boundingBox.min.x) / this.span;
 
 		const dataType = info.dataType;
-		if (dataType === 'laszip') {
-			this.loader = new Potree.EptLaszipLoader();
-		} else if (dataType === 'binary') {
-			this.loader = new Potree.EptBinaryLoader();
-		} else if (dataType === 'zstandard') {
-			this.loader = new Potree.EptZstandardLoader();
+		if (dataType === 'binary') {
+			this.loader = new exports.EptBinaryLoader();
 		} else {
 			throw new Error('Could not read data type: ' + dataType);
 		}
@@ -126,7 +122,7 @@ export class EptKey {
 		if (c)	min.z += dst.z / 2;
 		else	max.z -= dst.z / 2;
 
-		return new Potree.EptKey(
+		return new exports.EptKey(
 				this.ept,
 				new THREE.Box3(min, max),
 				this.d + 1,
@@ -154,7 +150,7 @@ export class PointCloudEptGeometryNode extends PointCloudTreeNode {
 		super();
 
 		this.ept = ept;
-		this.key = new Potree.EptKey(
+		this.key = new exports.EptKey(
 				this.ept,
 				b || this.ept.boundingBox,
 				d || 0,
@@ -214,10 +210,10 @@ export class PointCloudEptGeometryNode extends PointCloudTreeNode {
 
 	load() {
 		if (this.loaded || this.loading) return;
-		if (Potree.numNodesLoading >= Potree.maxNodesLoading) return;
+		if (exports.numNodesLoading >= exports.maxNodesLoading) return;
 
 		this.loading = true;
-		++Potree.numNodesLoading;
+		++exports.numNodesLoading;
 
 		if (this.numPoints === -1) this.loadHierarchy();
 		this.loadPoints();
@@ -262,7 +258,7 @@ export class PointCloudEptGeometryNode extends PointCloudTreeNode {
 
 			let key = parentNode.key.step(a, b, c);
 
-			let node = new Potree.PointCloudEptGeometryNode(
+			let node = new exports.PointCloudEptGeometryNode(
 					this.ept,
 					key.b,
 					key.d,
@@ -286,7 +282,7 @@ export class PointCloudEptGeometryNode extends PointCloudTreeNode {
 		this.mean = mean;
 		this.loaded = true;
 		this.loading = false;
-		--Potree.numNodesLoading;
+		--exports.numNodesLoading;
 	}
 
 	toPotreeName(d, x, y, z) {

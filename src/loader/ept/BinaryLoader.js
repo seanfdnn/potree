@@ -7,7 +7,7 @@ export class EptBinaryLoader {
 	}
 
 	workerPath() {
-		return Potree.scriptPath + '/workers/EptBinaryDecoderWorker.js';
+		return exports.scriptPath + '/workers/EptBinaryDecoderWorker.js';
 	}
 
 	load(node) {
@@ -39,7 +39,7 @@ export class EptBinaryLoader {
 
 	parse(node, buffer) {
 		let workerPath = this.workerPath();
-		let worker = Potree.workerPool.getWorker(workerPath);
+		let worker = exports.workerPool.getWorker(workerPath);
 
 		worker.onmessage = function(e) {
 			let g = new THREE.BufferGeometry();
@@ -94,7 +94,7 @@ export class EptBinaryLoader {
 					numPoints,
 					new THREE.Vector3(...e.data.mean));
 
-			Potree.workerPool.returnWorker(workerPath, worker);
+			exports.workerPool.returnWorker(workerPath, worker);
 		};
 
 		let toArray = (v) => [v.x, v.y, v.z];

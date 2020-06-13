@@ -61,6 +61,7 @@ export class DeviceOrientationControls extends EventDispatcher{
 			let q0 = new THREE.Quaternion();
 
 			euler.set(beta, gamma, alpha, 'ZXY');
+			console.log(euler);
 			quaternion.setFromEuler(euler);
 			quaternion.multiply(q0.setFromAxisAngle(zee, -orient));
 

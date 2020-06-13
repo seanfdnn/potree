@@ -60,16 +60,16 @@ export class PointCloudArena4DGeometryNode{
 			return;
 		}
 
-		if (Potree.numNodesLoading >= Potree.maxNodesLoading) {
+		if (exports.numNodesLoading >= exports.maxNodesLoading) {
 			return;
 		}
 
 		this.loading = true;
 
-		Potree.numNodesLoading++;
+		exports.numNodesLoading++;
 
 		let url = this.pcoGeometry.url + '?node=' + this.number;
-		let xhr = Potree.XHRFactory.createXMLHttpRequest();
+		let xhr = exports.XHRFactory.createXMLHttpRequest();
 		xhr.open('GET', url, true);
 		xhr.responseType = 'arraybuffer';
 
@@ -140,7 +140,7 @@ export class PointCloudArena4DGeometryNode{
 			node.numPoints = numPoints;
 			node.loaded = true;
 			node.loading = false;
-			Potree.numNodesLoading--;
+			exports.numNodesLoading--;
 		};
 
 		xhr.send(null);
@@ -182,14 +182,14 @@ export class PointCloudArena4DGeometry extends EventDispatcher{
 		this.root = null;
 		this.levels = 0;
 		this._spacing = null;
-		this.pointAttributes = new Potree.PointAttributes([
+		this.pointAttributes = new exports.PointAttributes([
 			'POSITION_CARTESIAN',
 			'COLOR_PACKED'
 		]);
 	}
 
 	static load(url, callback) {
-		let xhr = Potree.XHRFactory.createXMLHttpRequest();
+		let xhr = exports.XHRFactory.createXMLHttpRequest();
 		xhr.open('GET', url + '?info', true);
 
 		xhr.onreadystatechange = function () {
@@ -197,7 +197,7 @@ export class PointCloudArena4DGeometry extends EventDispatcher{
 				if (xhr.readyState === 4 && xhr.status === 200) {
 					let response = JSON.parse(xhr.responseText);
 
-					let geometry = new Potree.PointCloudArena4DGeometry();
+					let geometry = new exports.PointCloudArena4DGeometry();
 					geometry.url = url;
 					geometry.name = response.Name;
 					geometry.provider = response.Provider;
@@ -239,7 +239,7 @@ export class PointCloudArena4DGeometry extends EventDispatcher{
 
 	loadHierarchy(){
 		let url = this.url + '?tree';
-		let xhr = Potree.XHRFactory.createXMLHttpRequest();
+		let xhr = exports.XHRFactory.createXMLHttpRequest();
 		xhr.open('GET', url, true);
 		xhr.responseType = 'arraybuffer';
 
@@ -276,7 +276,7 @@ export class PointCloudArena4DGeometry extends EventDispatcher{
 					split = 'Z';
 				}
 
-				let node = new Potree.PointCloudArena4DGeometryNode();
+				let node = new exports.PointCloudArena4DGeometryNode();
 				node.hasLeft = hasLeft;
 				node.hasRight = hasRight;
 				node.split = split;

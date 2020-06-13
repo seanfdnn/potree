@@ -297,8 +297,6 @@ export class PointCloudOctree extends PointCloudTree {
 
 	computeVisibilityTextureData(nodes, camera){
 
-		if(Potree.measureTimings) performance.mark("computeVisibilityTextureData-start");
-
 		let data = new Uint8Array(nodes.length * 4);
 		let visibleNodeTextureOffsets = new Map();
 
@@ -343,11 +341,6 @@ export class PointCloudOctree extends PointCloudTree {
 			}
 
 			data[i * 4 + 3] = node.name.length - 1;
-		}
-
-		if(Potree.measureTimings){
-			performance.mark("computeVisibilityTextureData-end");
-			performance.measure("render.computeVisibilityTextureData", "computeVisibilityTextureData-start", "computeVisibilityTextureData-end");
 		}
 
 		return {
@@ -514,7 +507,7 @@ export class PointCloudOctree extends PointCloudTree {
 	 */
 	getPointsInProfile (profile, maxDepth, callback) {
 		if (callback) {
-			let request = new Potree.ProfileRequest(this, profile, maxDepth, callback);
+			let request = new exports.ProfileRequest(this, profile, maxDepth, callback);
 			this.profileRequests.push(request);
 
 			return request;
@@ -607,7 +600,7 @@ export class PointCloudOctree extends PointCloudTree {
 	 *
 	 */
 	getProfile (start, end, width, depth, callback) {
-		let request = new Potree.ProfileRequest(start, end, width, depth, callback);
+		let request = new exports.ProfileRequest(start, end, width, depth, callback);
 		this.profileRequests.push(request);
 	};
 
@@ -731,7 +724,7 @@ export class PointCloudOctree extends PointCloudTree {
 		if (!this.pickState) {
 			let scene = new THREE.Scene();
 
-			let material = new Potree.PointCloudMaterial();
+			let material = new exports.PointCloudMaterial();
 			material.activeAttributeName = "indices";
 
 			let renderTarget = new THREE.WebGLRenderTarget(
@@ -754,7 +747,7 @@ export class PointCloudOctree extends PointCloudTree {
 		{ // update pick material
 			pickMaterial.pointSizeType = pointSizeType;
 			//pickMaterial.shape = this.material.shape;
-			pickMaterial.shape = Potree.PointShape.PARABOLOID;
+			pickMaterial.shape = exports.PointShape.PARABOLOID;
 
 			pickMaterial.uniforms.uFilterReturnNumberRange.value = this.material.uniforms.uFilterReturnNumberRange.value;
 			pickMaterial.uniforms.uFilterNumberOfReturnsRange.value = this.material.uniforms.uFilterNumberOfReturnsRange.value;
@@ -772,8 +765,8 @@ export class PointCloudOctree extends PointCloudTree {
 			if(params.pickClipped){
 				pickMaterial.clipBoxes = this.material.clipBoxes;
 				pickMaterial.uniforms.clipBoxes = this.material.uniforms.clipBoxes;
-				if(this.material.clipTask === Potree.ClipTask.HIGHLIGHT){
-					pickMaterial.clipTask = Potree.ClipTask.NONE;
+				if(this.material.clipTask === exports.ClipTask.HIGHLIGHT){
+					pickMaterial.clipTask = exports.ClipTask.NONE;
 				}else{
 					pickMaterial.clipTask = this.material.clipTask;
 				}

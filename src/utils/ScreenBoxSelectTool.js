@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-
+import $ from  "jquery";
 
 import {BoxVolume} from "./Volume.js";
 import {Utils} from "../utils.js";

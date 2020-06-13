@@ -27,7 +27,7 @@
 	"env": {
 		"browser": true,
 		"worker": true,
-		"jquery": true,
+		"jquery": false,
 		"commonjs": true
 	},
 	"globals": {
