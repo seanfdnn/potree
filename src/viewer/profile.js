@@ -474,7 +474,7 @@ export class ProfileWindow extends EventDispatcher {
 		$('#potree_download_csv_icon').click(() => {
 			let points = new Points();
 			
-			for(let [pointcloud, entry] of this.pointclouds){
+			for(let [, entry] of this.pointclouds){
 				for(let pointSet of entry.points){
 					points.add(pointSet);
 				}
@@ -493,7 +493,7 @@ export class ProfileWindow extends EventDispatcher {
 
 			let points = new Points();
 
-			for(let [pointcloud, entry] of this.pointclouds){
+			for(let [, entry] of this.pointclouds){
 				for(let pointSet of entry.points){
 					points.add(pointSet);
 				}
@@ -518,11 +518,6 @@ export class ProfileWindow extends EventDispatcher {
 			new THREE.Vector2(mileage - radius, elevation - radius),
 			new THREE.Vector2(mileage + radius, elevation + radius));
 
-		let numTested = 0;
-		let numSkipped = 0;
-		let numTestedPoints = 0;
-		let numSkippedPoints = 0;
-
 		for (let [pointcloud, entry] of this.pointclouds) {
 			for(let points of entry.points){
 
@@ -534,13 +529,9 @@ export class ProfileWindow extends EventDispatcher {
 				let intersects = collisionBox.intersectsBox(pointBox);
 
 				if(!intersects){
-					numSkipped++;
-					numSkippedPoints += points.numPoints;
 					continue;
 				}
 
-				numTested++;
-				numTestedPoints += points.numPoints;
 
 				for (let i = 0; i < points.numPoints; i++) {
 
@@ -756,7 +747,7 @@ export class ProfileWindow extends EventDispatcher {
 		this.autoFit = true;
 		this.projectedBox = new THREE.Box3();
 
-		for(let [key, entry] of this.pointclouds){
+		for(let [, entry] of this.pointclouds){
 			entry.dispose();
 		}
 

@@ -272,25 +272,25 @@ export class CameraAnimation extends EventDispatcher{
 		const f = 0.3;
 
 		const positions = [
-			 0, 0, 0,
+			0, 0, 0,
 			-f, -f, +1,
 
-			 0, 0, 0,
-			 f, -f, +1,
+			0, 0, 0,
+			f, -f, +1,
 
-			 0, 0, 0,
-			 f, f, +1,
+			0, 0, 0,
+			f, f, +1,
 
-			 0, 0, 0,
+			0, 0, 0,
 			-f, f, +1,
 
 			-f, -f, +1,
-			 f, -f, +1,
+			f, -f, +1,
 
-			 f, -f, +1,
-			 f, f, +1,
+			f, -f, +1,
+			f, f, +1,
 
-			 f, f, +1,
+			f, f, +1,
 			-f, f, +1,
 
 			-f, f, +1,

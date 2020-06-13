@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 
 import {Utils} from "../../utils.js";
-import {Volume, BoxVolume, SphereVolume} from "../../utils/Volume.js";
+import {BoxVolume, SphereVolume} from "../../utils/Volume.js";
 
 import {MeasurePanel} from "./MeasurePanel.js";
 
@@ -269,9 +269,9 @@ export class VolumePanel extends MeasurePanel{
 			let url = `${viewer.server}/check_regions_filter?handle=${handle}`;
 
 			let sleep = function(duration){
-				return new Promise( (res, rej) => {
+				return new Promise( (resolve, reject) => {
 					setTimeout(() => {
-						res();
+						reject(Promise.TimeoutError);
 					}, duration);
 				});
 			};

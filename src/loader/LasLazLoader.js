@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import {LASFile} from 'plasio';
 import {Version} from "../Version.js";
 import {XHRFactory} from "../XHRFactory.js";
 
@@ -61,8 +62,8 @@ export class LasLazLoader {
 		let handler = new LasLazBatcher(node);
 
 		try{
-			 await lf.open();
-			 lf.isOpen = true;
+			await lf.open();
+			lf.isOpen = true;
 		}catch(e){
 			console.log("failed to open file. :(");
 

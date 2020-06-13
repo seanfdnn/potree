@@ -117,10 +117,10 @@ export class PointCloudMaterial extends THREE.RawShaderMaterial {
 			diffuse:			{ type: "fv", value: [1, 1, 1] },
 			transition:			{ type: "f", value: 0.5 },
 
-			 intensityRange:		{ type: "fv", value: [Infinity, -Infinity] },
+			intensityRange:		{ type: "fv", value: [Infinity, -Infinity] },
 
-			intensity_gbc: 		{ type: "fv", value: [1, 0, 0]},
-			uRGB_gbc:	 		{ type: "fv", value: [1, 0, 0]},
+			intensity_gbc: 		{ type: "fv", value: [1, 0, 0] },
+			uRGB_gbc:	 		{ type: "fv", value: [1, 0, 0] },
 			// intensityGamma:		{ type: "f", value: 1 },
 			// intensityContrast:	{ type: "f", value: 0 },
 			// intensityBrightness:{ type: "f", value: 0 },
@@ -139,15 +139,15 @@ export class PointCloudMaterial extends THREE.RawShaderMaterial {
 			clipMethod:			{ type: "i", value: 1 },
 			uShadowColor:		{ type: "3fv", value: [0, 0, 0] },
 
-			uExtraScale:		{ type: "f", value: 1},
-			uExtraOffset:		{ type: "f", value: 0},
+			uExtraScale:		{ type: "f", value: 1 },
+			uExtraOffset:		{ type: "f", value: 0 },
 			uExtraRange:		{ type: "2fv", value: [0, 1] },
 			uExtraGammaBrightContr:	{ type: "3fv", value: [1, 0, 0] },
 
-			uFilterReturnNumberRange:		{ type: "fv", value: [0, 7]},
-			uFilterNumberOfReturnsRange:	{ type: "fv", value: [0, 7]},
-			uFilterGPSTimeClipRange:		{ type: "fv", value: [0, 7]},
-			uFilterPointSourceIDClipRange:		{ type: "fv", value: [0, 65535]},
+			uFilterReturnNumberRange:		{ type: "fv", value: [0, 7] },
+			uFilterNumberOfReturnsRange:	{ type: "fv", value: [0, 7] },
+			uFilterGPSTimeClipRange:		{ type: "fv", value: [0, 7] },
+			uFilterPointSourceIDClipRange:		{ type: "fv", value: [0, 65535] },
 			matcapTextureUniform: 	{ type: "t", value: this.matcapTexture },
 			backfaceCulling: { type: "b", value: false },
 		};

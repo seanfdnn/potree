@@ -12,7 +12,6 @@ function CustomView (buffer) {
 	let tmpf = new Float32Array(tmp);
 	let tmpd = new Float64Array(tmp);
 	let tmpu8 = new Uint8Array(tmp);
-	let tmpi8 = new Int8Array(tmp);
 
 	this.getUint32 = function (i) {
 		return (this.u8[i + 3] << 24) | (this.u8[i + 2] << 16) | (this.u8[i + 1] << 8) | this.u8[i];
@@ -48,8 +47,6 @@ function CustomView (buffer) {
 		return this.u8[i];
 	};
 }
-
-Potree = {};
 
 onmessage = function (event) {
 

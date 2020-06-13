@@ -280,7 +280,6 @@ export class TransformationTool {
 
 				let selected = this.selection[0];
 				let maxScale = Math.max(...selected.scale.toArray());
-				let minScale = Math.min(...selected.scale.toArray());
 				let handleLength = Math.abs(selected.scale.dot(new THREE.Vector3(...handle.alignment)));
 				let alignment = new THREE.Vector3(...handle.alignment).multiplyScalar(2 * maxScale / handleLength);
 				alignment.applyMatrix4(selected.matrixWorld);
@@ -744,7 +743,6 @@ export class TransformationTool {
 			this.scene.updateMatrixWorld();
 
 			let selected = this.selection[0];
-			let world = selected.matrixWorld;
 			let camera = this.viewer.scene.getActiveCamera();
 			let domElement = this.viewer.renderer.domElement;
 			let mouse = this.viewer.inputHandler.mouse;
@@ -852,33 +850,6 @@ export class TransformationTool {
 						this.setActiveHandle(null);
 					}
 				}
-
-				// 
-				for(let handleName of Object.keys(this.scaleHandles)){
-					let handle = this.handles[handleName];
-					let node = handle.node;
-					let alignment = handle.alignment;
-
-					
-
-				}
-			}
-
-
-			{
-				let axisScale = (alignment) => {
-					let transformed = new THREE.Vector3(...alignment).applyMatrix4(selected.matrixWorld);
-					let distance = transformed.distanceTo(selected.getWorldPosition(new THREE.Vector3()));
-
-					return distance;
-				};
-
-				let scale = new THREE.Vector3(
-					axisScale([1, 0, 0]),
-					axisScale([0, 1, 0]),
-					axisScale([0, 0, 1]),
-				);
-
 			}
 
 		}else{

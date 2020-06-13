@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-
+import proj4 from 'proj4';
 import {Annotation} from "../Annotation.js";
 import {Measure} from "../utils/Measure.js";
 import {CameraAnimation} from "../modules/CameraAnimation/CameraAnimation.js";
@@ -275,7 +275,7 @@ function loadAnnotations(viewer, data){
 
 
 
-	const {items, hierarchy} = data;
+	const {items} = data;
 
 	const existingAnnotations = [];
 	viewer.scene.annotations.traverseDescendants(annotation => {

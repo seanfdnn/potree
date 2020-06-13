@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import {ClipTask, ClipMethod} from "./defines.js";
 import {Box3Helper} from "./utils/Box3Helper.js";
+import {BinaryHeap} from "@/libs/other/BinaryHeap";
 
 export function updatePointClouds(pointclouds, camera, renderer){
 
@@ -15,8 +16,6 @@ export function updatePointClouds(pointclouds, camera, renderer){
 				break;
 			}
 		}
-
-		let duration = performance.now() - start;
 	}
 
 	let result = updateVisibility(pointclouds, camera, renderer);

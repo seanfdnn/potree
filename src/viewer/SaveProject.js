@@ -186,35 +186,6 @@ function createSettingsData(viewer){
 	};
 }
 
-function createSceneContentData(viewer){
-
-	const data = [];
-
-	const potreeObjects = [];
-
-	viewer.scene.scene.traverse(node => {
-		if(node.potree){
-			potreeObjects.push(node);
-		}
-	});
-
-	for(const object of potreeObjects){
-		
-		if(object.potree.file){
-			const saveObject = {
-				file: object.potree.file,
-			};
-
-			data.push(saveObject);
-		}
-
-
-	}
-
-
-	return data;
-}
-
 function createViewData(viewer){
 	const view = viewer.scene.view;
 

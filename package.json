@@ -28,6 +28,7 @@
     "plasio": "https://github.com/verma/plasio.git",
     "proj4": "^2.6.2",
     "shapefile": "^0.6.6",
+    "stats.js": "^0.17.0",
     "three": "^0.117.1",
     "tweenjs": "^1.0.2"
   },

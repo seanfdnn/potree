@@ -283,6 +283,7 @@ export class OctreeLoader_1_8{
 		root.level = 0;
 		root.nodeType = 2;
 		root.hierarchyByteOffset = 0n;
+		/* global BigInt */
 		root.hierarchyByteSize = BigInt(metadata.hierarchy.firstChunkSize);
 		root.hasChildren = false;
 		root.spacing = octree.spacing;

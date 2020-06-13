@@ -12,7 +12,7 @@ class U {
 	};
 
 	static findDim(schema, name) {
-		var dim = schema.find((dim) => dim.name == name);
+		var dim = schema.find((dim) => dim.name === name);
 		if (!dim) throw new Error('Failed to find ' + name + ' in schema');
 		return dim;
 	}
@@ -24,7 +24,6 @@ class U {
 
 export class PointCloudEptGeometry {
 	constructor(url, info) {
-		let version = info.version;
 		let schema = info.schema;
 		let bounds = info.bounds;
 		let boundsConforming = info.boundsConforming;
@@ -86,14 +85,12 @@ export class PointCloudEptGeometry {
 		this.spacing =
 			(this.boundingBox.max.x - this.boundingBox.min.x) / this.span;
 
-		let hierarchyType = info.hierarchyType || 'json';
-
 		const dataType = info.dataType;
-		if (dataType == 'laszip') {
+		if (dataType === 'laszip') {
 			this.loader = new Potree.EptLaszipLoader();
-		} else if (dataType == 'binary') {
+		} else if (dataType === 'binary') {
 			this.loader = new Potree.EptBinaryLoader();
-		} else if (dataType == 'zstandard') {
+		} else if (dataType === 'zstandard') {
 			this.loader = new Potree.EptZstandardLoader();
 		} else {
 			throw new Error('Could not read data type: ' + dataType);
@@ -222,7 +219,7 @@ export class PointCloudEptGeometryNode extends PointCloudTreeNode {
 		this.loading = true;
 		++Potree.numNodesLoading;
 
-		if (this.numPoints == -1) this.loadHierarchy();
+		if (this.numPoints === -1) this.loadHierarchy();
 		this.loadPoints();
 	}
 

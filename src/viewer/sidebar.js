@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import * as Geopackage from '@ngageoint/geopackage';
 import {GeoJSONExporter} from "../exporter/GeoJSONExporter.js";
 import {DXFExporter} from "../exporter/DXFExporter.js";
 import {Volume, SphereVolume} from "../utils/Volume.js";
@@ -398,7 +399,7 @@ export class Sidebar{
 			return nodeID;
 		};
 
-		let pcID = tree.jstree('create_node', "#", { "text": "<b>Point Clouds</b>", "id": "pointclouds"}, "last", false, false);
+		let pcID = tree.jstree('create_node', "#", {"text": "<b>Point Clouds</b>", "id": "pointclouds"}, "last", false, false);
 		let measurementID = tree.jstree('create_node', "#", { "text": "<b>Measurements</b>", "id": "measurements" }, "last", false, false);
 		let annotationsID = tree.jstree('create_node', "#", { "text": "<b>Annotations</b>", "id": "annotations" }, "last", false, false);
 		let otherID = tree.jstree('create_node', "#", { "text": "<b>Other</b>", "id": "other" }, "last", false, false);

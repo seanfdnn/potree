@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import * as TWEEN from 'tween';
 import * as proj4 from 'proj4';
 import * as i18n from 'i18next';
+import { Stats } from 'stats.js';
 
 import {ClipTask, ClipMethod, CameraMode, LengthUnits, ElevationGradientRepeat} from "../defines.js";
 import {Renderer} from "../PotreeRenderer.js";
@@ -178,7 +179,6 @@ export class Viewer extends EventDispatcher{
 		{
 			let near = 2.5;
 			let far = 10.0;
-			let fov = 90;
 			
 			this.shadowTestCam = new THREE.PerspectiveCamera(90, 1, near, far);
 			this.shadowTestCam.position.set(3.50, -2.80, 8.561);
@@ -745,8 +745,6 @@ export class Viewer extends EventDispatcher{
 		let endPosition = camera.position.clone();
 		let startTarget = view.getPivot();
 		let endTarget = bs.center;
-		let startRadius = view.radius;
-		let endRadius = endPosition.distanceTo(endTarget);
 
 		let easing = TWEEN.Easing.Quartic.Out;
 
@@ -1373,7 +1371,7 @@ export class Viewer extends EventDispatcher{
 			let frameData = new VRFrameData();
 			let displays = await navigator.getVRDisplays();
 
-			if(displays.length == 0){
+			if(displays.length === 0){
 				console.info("no VR display found");
 				return false;
 			}
@@ -1454,7 +1452,7 @@ export class Viewer extends EventDispatcher{
 
 
 				// SCREEN SIZE
-				if(viewer.scene.cameraMode == CameraMode.PERSPECTIVE) {
+				if(viewer.scene.cameraMode === CameraMode.PERSPECTIVE) {
 					let fov = Math.PI * viewer.scene.cameraP.fov / 180;
 					let slope = Math.tan(fov / 2.0);
 					let projFactor = 0.5 * renderAreaSize.y / (slope * distance);
@@ -2032,7 +2030,7 @@ export class Viewer extends EventDispatcher{
 					names.add(groupname);
 				}
 				
-				for(let [_, group] of groups){
+				for(let [, group] of groups){
 					group.mean = group.sum / group.n;
 					group.measures.sort( (a, b) => a.duration - b.duration );
 					

@@ -1,6 +1,7 @@
 import * as THREE from 'three';
-
-import {Utils} from "../utils.js";
+import '@ngageoint/geopackage';
+import { Line2 } from 'three/examples/jsm/lines/Line2.js';
+import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry.js';
 
 const defaultColors = {
 	"landuse":   [0.5, 0.5, 0.5],
@@ -31,16 +32,7 @@ export class Geopackage{
 
 export class GeoPackageLoader{
 
-	constructor(){
-
-	}
-
 	static async loadUrl(url, params){
-
-		await Promise.all([
-			Utils.loadScript(`${Potree.scriptPath}/lazylibs/geopackage/geopackage.js`),
-			Utils.loadScript(`${Potree.scriptPath}/lazylibs/sql.js/sql-wasm.js`),
-		]);
 		
 		const result = await fetch(url);
 		const buffer = await result.arrayBuffer();
@@ -54,11 +46,6 @@ export class GeoPackageLoader{
 
 	static async loadBuffer(buffer, params){
 
-		await Promise.all([
-			Utils.loadScript(`${Potree.scriptPath}/lazylibs/geopackage/geopackage.js`),
-			Utils.loadScript(`${Potree.scriptPath}/lazylibs/sql.js/sql-wasm.js`),
-		]);
-
 		params = params || {};
 
 		const resolver = async (resolve) => {
@@ -67,9 +54,6 @@ export class GeoPackageLoader{
 			if(!transform){
 				transform = {forward: (arg) => arg};
 			}
-
-			const wasmPath = `${Potree.scriptPath}/lazylibs/sql.js/sql-wasm.wasm`;
-			const SQL = await initSqlJs({ locateFile: filename => wasmPath});
 
 			const u8 = new Uint8Array(buffer);
 
@@ -106,7 +90,7 @@ export class GeoPackageLoader{
 				node.name = table;
 				geo.node.add(node);
 
-				for(const [index, feature] of Object.entries(geoJson)){
+				for(const [, feature] of Object.entries(geoJson)){
 					//const featureNode = GeoPackageLoader.featureToSceneNode(feature, matLine, transform);
 					const featureNode = GeoPackageLoader.featureToSceneNode(feature, matLine, dao.projection, transform);
 					node.add(featureNode);
@@ -121,8 +105,6 @@ export class GeoPackageLoader{
 
 	static featureToSceneNode(feature, matLine, geopackageProjection, transform){
 		let geometry = feature.geometry;
-		
-		let color = new THREE.Color(1, 1, 1);
 		
 		if(feature.geometry.type === "Point"){
 			let sg = new THREE.SphereGeometry(1, 18, 18);
@@ -161,10 +143,10 @@ export class GeoPackageLoader{
 				coordinates[i + 2] -= min.z;
 			}
 			
-			const lineGeometry = new THREE.LineGeometry();
+			const lineGeometry = new LineGeometry();
 			lineGeometry.setPositions( coordinates );
 
-			const line = new THREE.Line2( lineGeometry, matLine );
+			const line = new Line2( lineGeometry, matLine );
 			line.computeLineDistances();
 			line.scale.set( 1, 1, 1 );
 			line.position.copy(min);
@@ -196,10 +178,10 @@ export class GeoPackageLoader{
 					coordinates[i + 2] -= min.z;
 				}
 
-				const lineGeometry = new THREE.LineGeometry();
+				const lineGeometry = new LineGeometry();
 				lineGeometry.setPositions( coordinates );
 
-				const line = new THREE.Line2( lineGeometry, matLine );
+				const line = new Line2( lineGeometry, matLine );
 				line.computeLineDistances();
 				line.scale.set( 1, 1, 1 );
 				line.position.copy(min);
@@ -210,5 +192,4 @@ export class GeoPackageLoader{
 			console.log("unhandled feature: ", feature);
 		}
 	}
-
 };

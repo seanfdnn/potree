@@ -38,7 +38,7 @@ function createMaterial(){
 		uniforms: {
 			// time: { value: 1.0 },
 			// resolution: { value: new THREE.Vector2() }
-			tColor: {value: new THREE.Texture() },
+			tColor: {value: new THREE.Texture()},
 			uNear: {value: 0.0},
 			uOpacity: {value: 1.0},
 		},
@@ -309,7 +309,6 @@ export class OrientedImageLoader{
 		let clipVolume = null;
 
 		const onMouseMove = (evt) => {
-			const tStart = performance.now();
 			if(hoveredElement){
 				hoveredElement.line.material.color.setRGB(0, 1, 0);
 			}
@@ -344,7 +343,6 @@ export class OrientedImageLoader{
 				hoveredElement = null;
 			}
 
-			let shouldRemoveClipVolume = clipVolume !== null && hoveredElement === null;
 			let shouldAddClipVolume = clipVolume === null && hoveredElement !== null;
 
 			if(clipVolume !== null && (hoveredElement === null || selectionChanged)){
@@ -369,10 +367,6 @@ export class OrientedImageLoader{
 					const alpha = THREE.Math.degToRad(fov / 2);
 					const d = 0.5 / Math.tan(alpha);
 					const newCamPos = pos.clone().add(dir.clone().multiplyScalar(d));
-					const newCamDir = pos.clone().sub(newCamPos);
-					const newCamTarget = new THREE.Vector3().addVectors(
-						newCamPos,
-						newCamDir.clone().multiplyScalar(viewer.getMoveSpeed()));
 					camera.position.copy(newCamPos);
 				}
 				let volume = new Potree.PolygonClipVolume(camera);
@@ -390,8 +384,6 @@ export class OrientedImageLoader{
 				viewer.scene.addPolygonClipVolume(volume);
 				clipVolume = volume;
 			}
-			const tEnd = performance.now();
-			//console.log(tEnd - tStart);
 		};
 
 		const moveToImage = (image) => {
@@ -449,7 +441,6 @@ export class OrientedImageLoader{
 		viewer.addEventListener("update", () => {
 
 			for(const image of orientedImages){
-				const world = image.mesh.matrixWorld;
 				const {width, height} = image;
 				const aspect = width / height;
 

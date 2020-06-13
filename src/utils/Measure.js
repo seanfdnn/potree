@@ -73,7 +73,7 @@ function createCircleRadiusLabel(){
 }
 
 function createCircleRadiusLine(){
-	const lineGeometry = new THREE.LineGeometry();
+	const lineGeometry = new LineGeometry();
 
 	lineGeometry.setPositions([
 		0, 0, 0,
@@ -153,7 +153,7 @@ function createCircleCenter(){
 }
 
 function createLine(){
-	const geometry = new THREE.LineGeometry();
+	const geometry = new LineGeometry();
 
 	geometry.setPositions([
 		0, 0, 0,

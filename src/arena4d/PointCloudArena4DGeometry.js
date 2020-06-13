@@ -51,10 +51,6 @@ Potree.PointCloudArena4DGeometryNode = class PointCloudArena4DGeometryNode{
 		return children;
 	}
 
-	getBoundingBox(){
-		return this.boundingBox;
-	}
-
 	getLevel(){
 		return this.level;
 	}

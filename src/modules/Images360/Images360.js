@@ -176,12 +176,6 @@ export class Images360 extends EventDispatcher{
 		this.sphere.material.needsUpdate = true;
 		this.sphere.visible = false;
 
-		let pos = viewer.scene.view.position;
-		let target = viewer.scene.view.getPivot();
-		let dir = target.clone().sub(pos).normalize();
-		let move = dir.multiplyScalar(10);
-		let newCamPos = target.clone().sub(move);
-
 		viewer.orbitControls.doubleClockZoomEnabled = true;
 		viewer.setControls(previousView.controls);
 
@@ -216,13 +210,10 @@ export class Images360 extends EventDispatcher{
 
 		let ray = Potree.Utils.mouseToRay(mouse, camera, domElement.clientWidth, domElement.clientHeight);
 
-		// let tStart = performance.now();
 		raycaster.ray.copy(ray);
 		let intersections = raycaster.intersectObjects(this.node.children);
 
 		if(intersections.length === 0){
-			// label.visible = false;
-
 			return;
 		}
 
@@ -230,14 +221,9 @@ export class Images360 extends EventDispatcher{
 		currentlyHovered = intersection.object;
 		currentlyHovered.material = smHovered;
 
-		//label.visible = true;
-		//label.setText(currentlyHovered.image360.file);
-		//currentlyHovered.getWorldPosition(label.position);
 	}
 
 	update(){
-
-		let {viewer} = this;
 
 		if(currentlyHovered){
 			currentlyHovered.material = sm;
