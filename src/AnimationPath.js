@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import * as TWEEN from 'tween';
+import TWEEN from 'tweenjs';
 
 export class PathAnimation{
 	

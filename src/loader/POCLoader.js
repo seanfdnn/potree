@@ -2,7 +2,6 @@ import * as THREE from 'three';
 import {PointCloudOctreeGeometry, PointCloudOctreeGeometryNode} from "../PointCloudOctreeGeometry.js";
 import {Version} from "../Version.js";
 import {XHRFactory} from "../XHRFactory.js";
-import {LasLazLoader} from "./LasLazLoader.js";
 import {BinaryLoader} from "./BinaryLoader.js";
 import {Utils} from "../utils.js";
 import {PointAttribute, PointAttributes, PointAttributeTypes} from "./PointAttributes.js";
@@ -96,22 +95,6 @@ function parseAttributes(cloudjs){
 
 }
 
-function lasLazAttributes(fMno){
-	const attributes = new PointAttributes();
-
-	attributes.add(PointAttribute.POSITION_CARTESIAN);
-	attributes.add(new PointAttribute("rgba", PointAttributeTypes.DATA_TYPE_UINT8, 4));
-	attributes.add(new PointAttribute("intensity", PointAttributeTypes.DATA_TYPE_UINT16, 1));
-	attributes.add(new PointAttribute("classification", PointAttributeTypes.DATA_TYPE_UINT8, 1));
-	attributes.add(new PointAttribute("gps-time", PointAttributeTypes.DATA_TYPE_DOUBLE, 1));
-	attributes.add(new PointAttribute("number of returns", PointAttributeTypes.DATA_TYPE_UINT8, 1));
-	attributes.add(new PointAttribute("return number", PointAttributeTypes.DATA_TYPE_UINT8, 1));
-	attributes.add(new PointAttribute("source id", PointAttributeTypes.DATA_TYPE_UINT16, 1));
-	//attributes.add(new PointAttribute("pointSourceID", PointAttributeTypes.DATA_TYPE_INT8, 4));
-
-
-	return attributes;
-}
 
 export class POCLoader {
 
@@ -164,16 +147,8 @@ export class POCLoader {
 					pco.boundingSphere = boundingBox.getBoundingSphere(new THREE.Sphere());
 					pco.tightBoundingSphere = tightBoundingBox.getBoundingSphere(new THREE.Sphere());
 					pco.offset = offset;
-					if (fMno.pointAttributes === 'LAS') {
-						pco.loader = new LasLazLoader(fMno.version, "las");
-						pco.pointAttributes = lasLazAttributes(fMno);
-					} else if (fMno.pointAttributes === 'LAZ') {
-						pco.loader = new LasLazLoader(fMno.version, "laz");
-						pco.pointAttributes = lasLazAttributes(fMno);
-					} else {
-						pco.loader = new BinaryLoader(fMno.version, boundingBox, fMno.scale);
-						pco.pointAttributes = parseAttributes(fMno);
-					}
+					pco.loader = new BinaryLoader(fMno.version, boundingBox, fMno.scale);
+					pco.pointAttributes = parseAttributes(fMno);
 
 					let nodes = {};
 

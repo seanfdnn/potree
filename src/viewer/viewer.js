@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import * as TWEEN from 'tween';
+import TWEEN from 'tweenjs';
 import proj4 from 'proj4';
 import i18n from 'i18next';
 import { Stats } from 'stats.js';

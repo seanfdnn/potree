@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import * as Geopackage from '@ngageoint/geopackage';
+import {Geopackage} from './loader/GeopackageLoader';
 import {GeoJSONExporter} from "../exporter/GeoJSONExporter.js";
 import {DXFExporter} from "../exporter/DXFExporter.js";
 import {Volume, SphereVolume} from "../utils/Volume.js";
