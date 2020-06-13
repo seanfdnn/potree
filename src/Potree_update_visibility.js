@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import {ClipTask, ClipMethod} from "./defines.js";
 import {Box3Helper} from "./utils/Box3Helper.js";
-import "../libs/other/BinaryHeap.js";
+import BinaryHeap from "../libs/other/BinaryHeap";
 
 export function updatePointClouds(pointclouds, camera, renderer){
 
@@ -100,7 +100,6 @@ export function updateVisibilityStructures(pointclouds, camera, renderer) {
 
 export function updateVisibility(pointclouds, camera, renderer){
 
-	let numVisibleNodes = 0;
 	let numVisiblePoints = 0;
 
 	let numVisiblePointsInPointclouds = new Map(pointclouds.map(pc => [pc, 0]));
@@ -119,7 +118,6 @@ export function updateVisibility(pointclouds, camera, renderer){
 
 	let loadedToGPUThisFrame = 0;
 	
-	let domWidth = renderer.domElement.clientWidth;
 	let domHeight = renderer.domElement.clientHeight;
 
 	// check if pointcloud has been transformed
@@ -194,7 +192,6 @@ export function updateVisibility(pointclouds, camera, renderer){
 			for(let clipBox of clipBoxes){
 
 				let pcWorldInverse = new THREE.Matrix4().getInverse(pointcloud.matrixWorld);
-				let toPCObject = pcWorldInverse.multiply(clipBox.box.matrixWorld);
 
 				let px = new THREE.Vector3(+0.5, 0, 0).applyMatrix4(pcWorldInverse);
 				let nx = new THREE.Vector3(-0.5, 0, 0).applyMatrix4(pcWorldInverse);
@@ -374,7 +371,6 @@ export function updateVisibility(pointclouds, camera, renderer){
 			} else {
 				// TODO ortho visibility
 				let bb = child.getBoundingBox();				
-				let distance = child.getBoundingSphere().center.distanceTo(camObjPos);
 				let diagonal = bb.max.clone().sub(bb.min).length();
 				//weight = diagonal / distance;
 

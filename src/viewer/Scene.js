@@ -233,19 +233,6 @@ export class Scene extends EventDispatcher{
 		});
 	};
 
-	removeCameraAnimation(animation){
-		let index = this.cameraAnimations.indexOf(volume);
-		if (index > -1) {
-			this.cameraAnimations.splice(index, 1);
-
-			this.dispatchEvent({
-				'type': 'camera_animation_removed',
-				'scene': this,
-				'animation': animation
-			});
-		}
-	};
-
 	addPolygonClipVolume(volume){
 		this.polygonClipVolumes.push(volume);
 		this.dispatchEvent({

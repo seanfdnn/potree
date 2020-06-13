@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import {Points} from "./Points.js";
+import BinaryHeap from "../libs/other/BinaryHeap";
 
 export class ProfileData {
 	constructor (profile) {
@@ -110,8 +111,6 @@ export class ProfileRequest {
 		// if hierarchy expands, also load nodes from expanded hierarchy
 		// once loaded, add data to this.points and remove node from queue
 		// only evaluate 1-50 nodes per frame to maintain responsiveness
-
-		let start = performance.now();
 
 		let maxNodesPerUpdate = 1;
 		let intersectedNodes = [];
@@ -301,7 +300,6 @@ export class ProfileRequest {
 				let acceptedPositions = null;
 				for(let result of this.getAccepted(numPoints, node, matrix, segment, segmentDir, points, totalMileage)){
 					if(!result){
-						let duration = performance.now() - checkpoint;
 						//console.log(`getPointsInsideProfile yield after ${duration}ms`);
 						yield false;
 						checkpoint = performance.now();
@@ -324,10 +322,6 @@ export class ProfileRequest {
 
 					let attribute = geometry.attributes[attributeName];
 					let numElements = attribute.array.length / numPoints;
-
-					if(numElements !== parseInt(numElements)){
-						debugger;
-					}
 
 					let Type = attribute.array.constructor;
 

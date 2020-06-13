@@ -1,6 +1,4 @@
 
-import {Utils} from "../../utils.js";
-
 export class CameraAnimationPanel{
 	constructor(viewer, propertiesPanel, animation){
 		this.viewer = viewer;

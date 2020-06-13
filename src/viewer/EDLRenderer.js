@@ -11,9 +11,6 @@ export class EDLRenderer{
 
 		this.edlMaterial = null;
 
-		this.rtRegular;
-		this.rtEDL;
-
 		this.gl = viewer.renderer.getContext();
 
 		this.shadowMap = new PointCloudSM(this.viewer.pRenderer);
@@ -200,7 +197,7 @@ export class EDLRenderer{
 		if(this.screenshot){
 			let oldBudget = Potree.pointBudget;
 			Potree.pointBudget = Math.max(10 * 1000 * 1000, 2 * oldBudget);
-			let result = Potree.updatePointClouds(
+			Potree.updatePointClouds(
 				viewer.scene.pointclouds, 
 				camera, 
 				viewer.renderer);

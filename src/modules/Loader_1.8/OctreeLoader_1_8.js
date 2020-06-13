@@ -219,6 +219,7 @@ let typenameTypeattributeMap = {
 	"uint64": PointAttributeTypes.DATA_TYPE_UINT64,
 };
 
+// eslint-disable-next-line camelcase
 export class OctreeLoader_1_8{
 
 	static parseAttributes(jsonAttributes){
@@ -230,7 +231,7 @@ export class OctreeLoader_1_8{
 		};
 
 		for(let jsonAttribute of jsonAttributes){
-			let {name, description, size, numElements, elementSize} = jsonAttribute;
+			let {name, numElements} = jsonAttribute;
 
 			let type = typenameTypeattributeMap[jsonAttribute.type];
 

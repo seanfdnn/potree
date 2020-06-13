@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import {Geopackage} from './loader/GeopackageLoader';
+import {Geopackage} from '../loader/GeoPackageLoader';
 import {GeoJSONExporter} from "../exporter/GeoJSONExporter.js";
 import {DXFExporter} from "../exporter/DXFExporter.js";
 import {Volume, SphereVolume} from "../utils/Volume.js";

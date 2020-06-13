@@ -307,6 +307,7 @@ export class InputHandler extends EventDispatcher {
 
 		
 		let consumed = false;
+		// eslint-disable-next-line no-return-assign
 		let consume = () => { return consumed = true; };
 		if (this.hoveredElements.length === 0) {
 			for (let inputListener of this.getSortedListeners()) {

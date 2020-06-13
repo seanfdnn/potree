@@ -1,7 +1,4 @@
 
-import {Enum} from "./Enum.js";
-
-
 export const CameraMode = {
 	ORTHOGRAPHIC: 0,
 	PERSPECTIVE: 1,

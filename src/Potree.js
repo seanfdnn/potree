@@ -10,13 +10,10 @@ import {WorkerPool} from "./WorkerPool.js";
 import {PointCloudArena4D} from "./arena4d/PointCloudArena4D";
 import {PointCloudArena4DGeometry} from "./arena4d/PointCloudArena4DGeometry";
 
-export * as THREE from 'three';
-
 export * from "./Actions.js";
 export * from "./AnimationPath.js";
 export * from "./Annotation.js";
 export * from "./defines.js";
-export * from "./Enum.js";
 export * from "./EventDispatcher.js";
 export * from "./Features.js";
 export * from "./KeyCodes.js";
@@ -135,6 +132,7 @@ export {scriptPath, resourcePath};
 export function loadPointCloud(path, name, callback){
 	let loaded = function(pointcloud){
 		pointcloud.name = name;
+		// eslint-disable-next-line standard/no-callback-literal
 		callback({type: 'pointcloud_loaded', pointcloud: pointcloud});
 	};
 

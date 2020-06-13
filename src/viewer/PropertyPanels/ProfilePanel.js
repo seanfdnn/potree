@@ -213,9 +213,9 @@ export class ProfilePanel extends MeasurePanel{
 			let url = `${viewer.server}/check_regions_filter?handle=${handle}`;
 
 			let sleep = function(duration){
-				return new Promise( (res, rej) => {
+				return new Promise( (resolve, reject) => {
 					setTimeout(() => {
-						res();
+						resolve();
 					}, duration);
 				});
 			};

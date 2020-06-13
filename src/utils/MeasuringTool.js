@@ -243,7 +243,6 @@ export class MeasuringTool extends EventDispatcher{
 	
 	update(){
 		let camera = this.viewer.scene.getActiveCamera();
-		let domElement = this.renderer.domElement;
 		let measurements = this.viewer.scene.measurements;
 
 		const renderAreaSize = this.renderer.getSize(new THREE.Vector2());
@@ -300,7 +299,7 @@ export class MeasuringTool extends EventDispatcher{
 					-(screenPos.y / clientHeight) * 2 + 1, 
 					0.5 );
 				labelPos.unproject(camera);
-				if(this.viewer.scene.cameraMode == CameraMode.PERSPECTIVE) {
+				if(this.viewer.scene.cameraMode === CameraMode.PERSPECTIVE) {
 					let direction = labelPos.sub(camera.position).normalize();
 					labelPos = new THREE.Vector3().addVectors(
 						camera.position, direction.multiplyScalar(distance));

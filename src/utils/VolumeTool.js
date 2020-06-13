@@ -60,6 +60,7 @@ export class VolumeTool extends EventDispatcher{
 	startInsertion (args = {}) {
 		let volume;
 		if(args.type){
+			// eslint-disable-next-line new-cap
 			volume = new args.type();
 		}else{
 			volume = new BoxVolume();

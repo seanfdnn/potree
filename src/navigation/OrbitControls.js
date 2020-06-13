@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import TWEEN from 'tweenjs';
 /**
  * @author mschuetz / http://mschuetz.at
  *
