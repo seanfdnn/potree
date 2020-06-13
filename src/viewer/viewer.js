@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import * as TWEEN from 'tween';
 import 'proj4';
 
 import {ClipTask, ClipMethod, CameraMode, LengthUnits, ElevationGradientRepeat} from "../defines.js";
@@ -131,7 +132,7 @@ export class Viewer extends EventDispatcher{
 		this.inputHandler = null;
 		this.controls = null;
 
-		this.clippingTool =  null;
+		this.clippingTool = null;
 		this.transformationTool = null;
 		this.navigationCube = null;
 		this.compass = null;
@@ -240,7 +241,7 @@ export class Viewer extends EventDispatcher{
 			this.setEDLOpacity(1.0);
 			this.setClipTask(ClipTask.HIGHLIGHT);
 			this.setClipMethod(ClipMethod.INSIDE_ANY);
-			this.setPointBudget(1*1000*1000);
+			this.setPointBudget(1 * 1000 * 1000);
 			this.setShowBoundingBox(false);
 			this.setFreeze(false);
 			this.setControls(this.orbitControls);
@@ -666,7 +667,7 @@ export class Viewer extends EventDispatcher{
 	}
 
 	setFilterPointSourceIDRange(from, to){
-		this.filterPointSourceIDRange = [from, to]
+		this.filterPointSourceIDRange = [from, to];
 		this.dispatchEvent({'type': 'filter_point_source_id_range_changed', 'viewer': this});
 	}
 
@@ -780,7 +781,7 @@ export class Viewer extends EventDispatcher{
 	moveToGpsTimeVicinity(time){
 		const result = Potree.Utils.findClosestGpsTime(time, viewer);
 
-		const box  = result.node.pointcloud.deepestNodeAt(result.position).getBoundingBox();
+		const box = result.node.pointcloud.deepestNodeAt(result.position).getBoundingBox();
 		const diameter = box.min.distanceTo(box.max);
 
 		const camera = this.scene.getActiveCamera();
@@ -1457,7 +1458,7 @@ export class Viewer extends EventDispatcher{
 				if(viewer.scene.cameraMode == CameraMode.PERSPECTIVE) {
 					let fov = Math.PI * viewer.scene.cameraP.fov / 180;
 					let slope = Math.tan(fov / 2.0);
-					let projFactor =  0.5 * renderAreaSize.y / (slope * distance);
+					let projFactor = 0.5 * renderAreaSize.y / (slope * distance);
 					screenSize = radius * projFactor;
 				} else {
 					screenSize = Utils.projectedRadiusOrtho(radius, viewer.scene.cameraO.projectionMatrix, renderAreaSize.x, renderAreaSize.y);
@@ -1549,7 +1550,7 @@ export class Viewer extends EventDispatcher{
 		
 		const scene = this.scene;
 		const camera = scene.getActiveCamera();
-		const visiblePointClouds = this.scene.pointclouds.filter(pc => pc.visible)
+		const visiblePointClouds = this.scene.pointclouds.filter(pc => pc.visible);
 		
 		Potree.pointLoadLimit = Potree.pointBudget * 2;
 
@@ -1878,7 +1879,7 @@ export class Viewer extends EventDispatcher{
 					camera.projectionMatrix = new THREE.Matrix4();
 					camera.matrixWorldInverse = new THREE.Matrix4();
 					camera.matrixWorld = new THREE.Matrix4();
-					camera.updateProjectionMatrix =  () => {};
+					camera.updateProjectionMatrix = () => {};
 					camera.updateMatrixWorld = () => {};
 					camera.fov = 60;
 				};
@@ -1893,7 +1894,7 @@ export class Viewer extends EventDispatcher{
 
 				vr.node.updateMatrixWorld();
 
-				{// LEFT
+				{ // LEFT
 					camera.projectionMatrix.fromArray(frameData.leftProjectionMatrix);
 
 					const leftView = new THREE.Matrix4().fromArray(frameData.leftViewMatrix);
@@ -1916,7 +1917,7 @@ export class Viewer extends EventDispatcher{
 					//this.renderer.render(this.overlay, this.overlayCamera);
 				}
 
-				{// RIGHT
+				{ // RIGHT
 				
 					camera.projectionMatrix.fromArray(frameData.rightProjectionMatrix);
 
@@ -1947,7 +1948,7 @@ export class Viewer extends EventDispatcher{
 						// TODO this can't be right...can it?
 
 						const left = frameData.leftViewMatrix;
-						const right = frameData.rightViewMatrix
+						const right = frameData.rightViewMatrix;
 
 						const centerView = new THREE.Matrix4();
 
@@ -1994,8 +1995,8 @@ export class Viewer extends EventDispatcher{
 					scene.cameraO.bottom = -frustumScale * 1 / aspect;
 					scene.cameraO.updateProjectionMatrix();
 
-					scene.cameraScreenSpace.top = 1/aspect;
-					scene.cameraScreenSpace.bottom = -1/aspect;
+					scene.cameraScreenSpace.top = 1 / aspect;
+					scene.cameraScreenSpace.bottom = -1 / aspect;
 					scene.cameraScreenSpace.updateProjectionMatrix();
 				}
 
@@ -2054,7 +2055,7 @@ export class Viewer extends EventDispatcher{
 				for(let [key, value] of glQueries){
 
 					let group = {
-						measures: value.map(v => {return {duration: v}}),
+						measures: value.map(v => { return {duration: v}; }),
 						sum: value.reduce( (a, i) => a + i, 0),
 						n: value.length,
 						min: Math.min(...value),
@@ -2084,12 +2085,12 @@ export class Viewer extends EventDispatcher{
 				let cmax = 10;
 				let csam = 6;
 				
-				let message = ` ${"NAME".padEnd(cn)} |` 
-					+ ` ${"MIN".padStart(cmin)} |`
-					+ ` ${"MEDIAN".padStart(cmed)} |`
-					+ ` ${"MAX".padStart(cmax)} |`
-					+ ` ${"SAMPLES".padStart(csam)} \n`;
-				message += ` ${"-".repeat(message.length) }\n`;
+				let message = ` ${"NAME".padEnd(cn)} |` + 
+					` ${"MIN".padStart(cmin)} |` +
+					` ${"MEDIAN".padStart(cmed)} |` +
+					` ${"MAX".padStart(cmax)} |` +
+					` ${"SAMPLES".padStart(csam)} \n`;
+				message += ` ${"-".repeat(message.length)}\n`;
 				
 				names = Array.from(names).sort();
 				for(let name of names){
@@ -2099,11 +2100,11 @@ export class Viewer extends EventDispatcher{
 					let max = group.max.toFixed(3);
 					let n = group.n;
 					
-					message += ` ${name.padEnd(cn)} |`
-						+ ` ${min.padStart(cmin)} |`
-						+ ` ${median.padStart(cmed)} |`
-						+ ` ${max.padStart(cmax)} |`
-						+ ` ${n.toString().padStart(csam)}\n`;
+					message += ` ${name.padEnd(cn)} |` +
+						` ${min.padStart(cmin)} |` +
+						` ${median.padStart(cmed)} |` +
+						` ${max.padStart(cmax)} |` +
+						` ${n.toString().padStart(csam)}\n`;
 				}
 				message += `\n`;
 				console.log(message);
@@ -2139,7 +2140,7 @@ export class Viewer extends EventDispatcher{
 		}catch(e){
 			console.error(e);
 			this.postError("requestPresent failed");
-			return;
+			
 		}
 
 		//window.addEventListener('vrdisplaypresentchange', onVRPresentChange, false);
@@ -2238,7 +2239,7 @@ export class Viewer extends EventDispatcher{
 					opacity: 0	
 				}, fadeDuration);
 				message.element.slideToggle(slideOutDuration);
-			}, params.duration)
+			}, params.duration);
 		}
 
 		return message;

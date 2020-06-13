@@ -217,7 +217,7 @@ let typenameTypeattributeMap = {
 	"uint32": PointAttributeTypes.DATA_TYPE_UINT32,
 	"int64": PointAttributeTypes.DATA_TYPE_INT64,
 	"uint64": PointAttributeTypes.DATA_TYPE_UINT64,
-}
+};
 
 export class OctreeLoader_1_8{
 

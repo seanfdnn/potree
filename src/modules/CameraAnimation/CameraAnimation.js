@@ -42,7 +42,7 @@ export class CameraAnimation extends EventDispatcher{
 		this.duration = 5;
 		this.t = 0;
 		// "centripetal", "chordal", "catmullrom"
-		this.curveType = "centripetal" 
+		this.curveType = "centripetal"; 
 		this.visible = true;
 
 		this.createUpdateHook();
@@ -272,34 +272,34 @@ export class CameraAnimation extends EventDispatcher{
 		const f = 0.3;
 
 		const positions = [
-			 0,  0,  0,
+			 0, 0, 0,
 			-f, -f, +1,
 
-			 0,  0,  0,
+			 0, 0, 0,
 			 f, -f, +1,
 
-			 0,  0,  0,
-			 f,  f, +1,
+			 0, 0, 0,
+			 f, f, +1,
 
-			 0,  0,  0,
-			-f,  f, +1,
+			 0, 0, 0,
+			-f, f, +1,
 
 			-f, -f, +1,
 			 f, -f, +1,
 
 			 f, -f, +1,
-			 f,  f, +1,
+			 f, f, +1,
 
-			 f,  f, +1,
-			-f,  f, +1,
+			 f, f, +1,
+			-f, f, +1,
 
-			-f,  f, +1,
+			-f, f, +1,
 			-f, -f, +1,
 		];
 
 		const geometry = new LineGeometry();
 
-		geometry.setAttribute('position', new THREE.BufferAttribute(positions,3));
+		geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 		geometry.verticesNeedUpdate = true;
 		geometry.computeBoundingSphere();
 

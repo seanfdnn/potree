@@ -1,3 +1,4 @@
+import * as THREE from 'three';
 import {XHRFactory} from "../../XHRFactory.js";
 
 /**

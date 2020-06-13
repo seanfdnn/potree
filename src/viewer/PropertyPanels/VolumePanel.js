@@ -268,13 +268,13 @@ export class VolumePanel extends MeasurePanel{
 		{ // WAIT, CHECK PROGRESS, HANDLE FINISH
 			let url = `${viewer.server}/check_regions_filter?handle=${handle}`;
 
-			let sleep = (function(duration){
+			let sleep = function(duration){
 				return new Promise( (res, rej) => {
 					setTimeout(() => {
 						res();
 					}, duration);
 				});
-			});
+			};
 
 			let handleFiltering = (jsResponse) => {
 				let {progress, estimate} = jsResponse;

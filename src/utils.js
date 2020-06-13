@@ -615,9 +615,9 @@ export class Utils {
 
 		for(const node of nodes){
 
-			const isOkay = node.geometryNode != null 
-				&& node.geometryNode.geometry != null
-				&& node.sceneNode != null;
+			const isOkay = node.geometryNode != null && 
+				node.geometryNode.geometry != null &&
+				node.sceneNode != null;
 
 			if(!isOkay){
 				continue;
@@ -838,9 +838,9 @@ export class Utils {
 
 		const d = (m, n, o, p) => {
 			let result =  
-				  (P[m].x - P[n].x) * (P[o].x - P[p].x)
-				+ (P[m].y - P[n].y) * (P[o].y - P[p].y)
-				+ (P[m].z - P[n].z) * (P[o].z - P[p].z);
+				  (P[m].x - P[n].x) * (P[o].x - P[p].x) +
+				(P[m].y - P[n].y) * (P[o].y - P[p].y) +
+				(P[m].z - P[n].z) * (P[o].z - P[p].z);
 
 			return result;
 		};

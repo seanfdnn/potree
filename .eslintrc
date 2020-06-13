@@ -16,13 +16,18 @@
 		"comma-dangle": "off",
 		"object-property-newline": "off",
 		"eol-last": "off",
-		"no-unused-vars": "off"
+		"no-unused-vars": "warn",
+		"no-debugger": "warn",
+		"no-redeclare": "warn",
+		"no-global-assign": "warn"
 	},
 	"parserOptions": { 
 		"ecmaVersion": 11
 	},
 	"env": {
 		"browser": true,
-		"worker": true
+		"worker": true,
+		"jquery": true,
+		"commonjs": true
 	}
 }

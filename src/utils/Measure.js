@@ -672,7 +672,7 @@ export class Measure extends THREE.Object3D {
 
 				let suffix = "";
 				if(this.lengthUnit != null && this.lengthUnitDisplay != null){
-					distance = distance / this.lengthUnit.unitspermeter * this.lengthUnitDisplay.unitspermeter;  //convert to meters then to the display unit
+					distance = distance / this.lengthUnit.unitspermeter * this.lengthUnitDisplay.unitspermeter; //convert to meters then to the display unit
 					suffix = this.lengthUnitDisplay.code;
 				}
 
@@ -741,7 +741,7 @@ export class Measure extends THREE.Object3D {
 
 				let suffix = "";
 				if(this.lengthUnit != null && this.lengthUnitDisplay != null){
-					height = height / this.lengthUnit.unitspermeter * this.lengthUnitDisplay.unitspermeter;  //convert to meters then to the display unit
+					height = height / this.lengthUnit.unitspermeter * this.lengthUnitDisplay.unitspermeter; //convert to meters then to the display unit
 					suffix = this.lengthUnitDisplay.code;
 				}
 
@@ -813,12 +813,12 @@ export class Measure extends THREE.Object3D {
 
 			let suffix = "";
 			if(this.lengthUnit != null && this.lengthUnitDisplay != null){
-				area = area / Math.pow(this.lengthUnit.unitspermeter, 2) * Math.pow(this.lengthUnitDisplay.unitspermeter, 2);  //convert to square meters then to the square display unit
+				area = area / Math.pow(this.lengthUnit.unitspermeter, 2) * Math.pow(this.lengthUnitDisplay.unitspermeter, 2); //convert to square meters then to the square display unit
 				suffix = this.lengthUnitDisplay.code;
 			}
 
 			let txtArea = Utils.addCommas(area.toFixed(1));
-			let msg =  `${txtArea} ${suffix}\u00B2`;
+			let msg = `${txtArea} ${suffix}\u00B2`;
 			this.areaLabel.setText(msg);
 		}
 

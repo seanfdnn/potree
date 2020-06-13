@@ -81,9 +81,9 @@ export class PointCloudOctreeNode extends PointCloudTreeNode {
 			pos.set(x, y, z, 1);
 			pos.applyMatrix4(objectToBox);
 
-			if(-0.5 < pos.x && pos.x < 0.5){
-				if(-0.5 < pos.y && pos.y < 0.5){
-					if(-0.5 < pos.z && pos.z < 0.5){
+			if(pos.x > -0.5 && pos.x < 0.5){
+				if(pos.y > -0.5 && pos.y < 0.5){
+					if(pos.z > -0.5 && pos.z < 0.5){
 						pos.set(x, y, z, 1).applyMatrix4(this.sceneNode.matrixWorld);
 						inBox.push(new THREE.Vector3(pos.x, pos.y, pos.z));
 					}
@@ -954,7 +954,7 @@ export class PointCloudOctree extends PointCloudTree {
 
 				} else {
 
-					let values = attribute.array.slice(attribute.itemSize * hit.pIndex, attribute.itemSize * (hit.pIndex + 1)) ;
+					let values = attribute.array.slice(attribute.itemSize * hit.pIndex, attribute.itemSize * (hit.pIndex + 1));
 
 					if(attribute.potree){
 						const {scale, offset} = attribute.potree;
@@ -1026,9 +1026,9 @@ export class PointCloudOctree extends PointCloudTree {
 				pos.set(x, y, z, 1);
 				pos.applyMatrix4(objectToBox);
 
-				if(-0.5 < pos.x && pos.x < 0.5){
-					if(-0.5 < pos.y && pos.y < 0.5){
-						if(-0.5 < pos.z && pos.z < 0.5){
+				if(pos.x > -0.5 && pos.x < 0.5){
+					if(pos.y > -0.5 && pos.y < 0.5){
+						if(pos.z > -0.5 && pos.z < 0.5){
 							shrinkedLocalBounds.expandByPoint(pos);
 						}
 					}
@@ -1085,9 +1085,9 @@ export class PointCloudOctree extends PointCloudTree {
 				pos.set(x, y, z, 1);
 				pos.applyMatrix4(objectToBox);
 
-				if(-0.5 < pos.x && pos.x < 0.5){
-					if(-0.5 < pos.y && pos.y < 0.5){
-						if(-0.5 < pos.z && pos.z < 0.5){
+				if(pos.x > -0.5 && pos.x < 0.5){
+					if(pos.y > -0.5 && pos.y < 0.5){
+						if(pos.z > -0.5 && pos.z < 0.5){
 							shrinkedLocalBounds.expandByPoint(pos);
 						}
 					}

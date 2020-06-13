@@ -58,8 +58,8 @@ const lineGeometry = new THREE.Geometry();
 lineGeometry.vertices.push(
 	new THREE.Vector3(-0.5, -0.5, 0),
 	new THREE.Vector3( 0.5, -0.5, 0),
-	new THREE.Vector3( 0.5,  0.5, 0),
-	new THREE.Vector3(-0.5,  0.5, 0),
+	new THREE.Vector3( 0.5, 0.5, 0),
+	new THREE.Vector3(-0.5, 0.5, 0),
 	new THREE.Vector3(-0.5, -0.5, 0),
 );
 
@@ -168,7 +168,7 @@ export class OrientedImageLoader{
 		const height = parseInt(doc.getElementsByTagName("height")[0].textContent);
 		const f = parseFloat(doc.getElementsByTagName("f")[0].textContent);
 
-		let a = (height / 2)  / f;
+		let a = (height / 2) / f;
 		let fov = 2 * THREE.Math.radToDeg(Math.atan(a));
 
 		const params = {
@@ -326,8 +326,8 @@ export class OrientedImageLoader{
 			//const intersects = getIntersects(onClickPosition, scene.children);
 			const camera = viewer.scene.getActiveCamera();
 			const mouse = new THREE.Vector3(
-				+ ( onClickPosition.x * 2 ) - 1, 
-				- ( onClickPosition.y * 2 ) + 1 );
+				+( onClickPosition.x * 2 ) - 1, 
+				-( onClickPosition.y * 2 ) + 1 );
 			const objects = orientedImages.map(i => i.mesh);
 			raycaster.setFromCamera( mouse, camera );
 			const intersects = raycaster.intersectObjects( objects );
@@ -356,7 +356,7 @@ export class OrientedImageLoader{
 			if(shouldAddClipVolume || selectionChanged){
 				const img = hoveredElement;
 				const fov = cameraParams.fov;
-				const aspect  = cameraParams.width / cameraParams.height;
+				const aspect = cameraParams.width / cameraParams.height;
 				const near = 1.0;
 				const far = 1000 * 1000;
 				const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
@@ -382,8 +382,8 @@ export class OrientedImageLoader{
 				let m3 = new THREE.Mesh();
 				m0.position.set(-1, -1, 0);
 				m1.position.set( 1, -1, 0);
-				m2.position.set( 1,  1, 0);
-				m3.position.set(-1,  1, 0);
+				m2.position.set( 1, 1, 0);
+				m3.position.set(-1, 1, 0);
 				volume.markers.push(m0, m1, m2, m3);
 				volume.initialized = true;
 				

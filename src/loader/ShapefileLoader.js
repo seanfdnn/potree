@@ -81,9 +81,9 @@ export class ShapefileLoader{
 			}
 			
 			for(let i = 0; i < coordinates.length; i += 3){
-				coordinates[i+0] -= min.x;
-				coordinates[i+1] -= min.y;
-				coordinates[i+2] -= min.z;
+				coordinates[i + 0] -= min.x;
+				coordinates[i + 1] -= min.y;
+				coordinates[i + 2] -= min.z;
 			}
 			
 			const lineGeometry = new LineGeometry();
@@ -115,9 +115,9 @@ export class ShapefileLoader{
 				}
 				
 				for(let i = 0; i < coordinates.length; i += 3){
-					coordinates[i+0] -= min.x;
-					coordinates[i+1] -= min.y;
-					coordinates[i+2] -= min.z;
+					coordinates[i + 0] -= min.x;
+					coordinates[i + 1] -= min.y;
+					coordinates[i + 2] -= min.z;
 				}
 
 				const lineGeometry = new LineGeometry();

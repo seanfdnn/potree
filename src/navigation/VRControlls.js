@@ -106,7 +106,7 @@ export class VRControlls{
 				const node = new THREE.Mesh(geometry, material);
 
 				const position = new THREE.Vector3().addVectors(
-					start.clone().multiplyScalar(1-u),
+					start.clone().multiplyScalar(1 - u),
 					end.clone().multiplyScalar(u)
 				);
 
@@ -130,7 +130,7 @@ export class VRControlls{
 				const u = i / n;
 
 				const position = new THREE.Vector3().addVectors(
-					start.clone().multiplyScalar(1-u),
+					start.clone().multiplyScalar(1 - u),
 					end.clone().multiplyScalar(u)
 				);
 
@@ -158,7 +158,7 @@ export class VRControlls{
 
 	copyPad(pad){
 		const axes = pad.axes.map(a => a);
-		const buttons = pad.buttons.map(b => {return {pressed: b.pressed}});
+		const buttons = pad.buttons.map(b => { return {pressed: b.pressed}; });
 
 		const pose = {
 			position: new Float32Array(pad.pose.position),

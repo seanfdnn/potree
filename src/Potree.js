@@ -1,3 +1,13 @@
+import "./extensions/OrthographicCamera.js";
+import "./extensions/PerspectiveCamera.js";
+import "./extensions/Ray.js";
+
+import {LRU} from "./LRU.js";
+import {POCLoader} from "./loader/POCLoader.js";
+import {EptLoader} from "./loader/EptLoader.js";
+import {PointCloudOctree} from "./PointCloudOctree.js";
+import {WorkerPool} from "./WorkerPool.js";
+
 export * as THREE from 'three';
 
 export * from "./Actions.js";
@@ -75,16 +85,6 @@ export {EarthControls} from "./navigation/EarthControls.js";
 export {DeviceOrientationControls} from "./navigation/DeviceOrientationControls.js";
 export {VRControlls} from "./navigation/VRControlls.js";
 
-import "./extensions/OrthographicCamera.js";
-import "./extensions/PerspectiveCamera.js";
-import "./extensions/Ray.js";
-
-import {LRU} from "./LRU.js";
-import {POCLoader} from "./loader/POCLoader.js";
-import {EptLoader} from "./loader/EptLoader.js";
-import {PointCloudOctree} from "./PointCloudOctree.js";
-import {WorkerPool} from "./WorkerPool.js";
-
 export const workerPool = new WorkerPool();
 
 export const version = {
@@ -143,8 +143,7 @@ export function loadPointCloud(path, name, callback){
 		EptLoader.load(path, function(geometry) {
 			if (!geometry) {
 				console.error(new Error(`failed to load point cloud from URL: ${path}`));
-			}
-			else {
+			} else {
 				let pointcloud = new PointCloudOctree(geometry);
 				loaded(pointcloud);
 			}

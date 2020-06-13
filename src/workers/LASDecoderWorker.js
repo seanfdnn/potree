@@ -232,9 +232,9 @@ function readUsingDataView(event) {
 		let uy = sourceView.getInt32(i * sourcePointSize + 4, true);
 		let uz = sourceView.getInt32(i * sourcePointSize + 8, true);
 
-		x = ux * scale[0] + offset[0] - event.data.mins[0];
-		y = uy * scale[1] + offset[1] - event.data.mins[1];
-		z = uz * scale[2] + offset[2] - event.data.mins[2];
+		let x = ux * scale[0] + offset[0] - event.data.mins[0];
+		let y = uy * scale[1] + offset[1] - event.data.mins[1];
+		let z = uz * scale[2] + offset[2] - event.data.mins[2];
 
 		positions[3 * i + 0] = x;
 		positions[3 * i + 1] = y;

@@ -29,10 +29,10 @@ export class OrientedImageControls extends EventDispatcher{
 		this.shear = [0, 0];
 
 		// const style = ``;
-		this.elUp =    $(`<input type="button" value="🡅" style="position: absolute; top: 10px; left: calc(50%); z-index: 1000" />`);
+		this.elUp = $(`<input type="button" value="🡅" style="position: absolute; top: 10px; left: calc(50%); z-index: 1000" />`);
 		this.elRight = $(`<input type="button" value="🡆" style="position: absolute; top: calc(50%); right: 10px; z-index: 1000" />`);
-		this.elDown =  $(`<input type="button" value="🡇" style="position: absolute; bottom: 10px; left: calc(50%); z-index: 1000" />`);
-		this.elLeft =  $(`<input type="button" value="🡄" style="position: absolute; top: calc(50%); left: 10px; z-index: 1000" />`);
+		this.elDown = $(`<input type="button" value="🡇" style="position: absolute; bottom: 10px; left: calc(50%); z-index: 1000" />`);
+		this.elLeft = $(`<input type="button" value="🡄" style="position: absolute; top: calc(50%); left: 10px; z-index: 1000" />`);
 		this.elExit = $(`<input type="button" value="Back to 3D view" style="position: absolute; bottom: 10px; right: 10px; z-index: 1000" />`);
 
 		this.elExit.click( () => {
@@ -134,7 +134,7 @@ export class OrientedImageControls extends EventDispatcher{
 		const attenuation = 0;
 
 		const oldFov = this.viewer.getFOV();
-		let fovProgression =  progression * this.fovDelta;
+		let fovProgression = progression * this.fovDelta;
 		let newFov = oldFov * ((1 + fovProgression / 10));
 
 		newFov = Math.max(this.fovMin, newFov);
@@ -170,7 +170,7 @@ export class OrientedImageControls extends EventDispatcher{
 
 		const shu = (1 - diff);
 
-		const newShear =  [
+		const newShear = [
 			(1 - shu) * this.shear[0] + shu * shx,
 			(1 - shu) * this.shear[1] + shu * shy,
 		];
@@ -181,7 +181,7 @@ export class OrientedImageControls extends EventDispatcher{
 		const {originalCam, shearCam} = this;
 
 		originalCam.fov = newFov;
-		originalCam.updateMatrixWorld()
+		originalCam.updateMatrixWorld();
 		originalCam.updateProjectionMatrix();
 		shearCam.copy(originalCam);
 		shearCam.rotation.set(...originalCam.rotation.toArray());

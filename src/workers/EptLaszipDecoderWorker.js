@@ -54,7 +54,7 @@ function readUsingDataView(event) {
 	// Point format 3 contains an 8-byte GpsTime before RGB values, so make
 	// sure we have the correct color offset.
 	let hasColor = pointFormat == 2 || pointFormat == 3;
-	let co = pointFormat == 2 ? 20 : 28;
+	let co = pointFormat === 2 ? 20 : 28;
 
 	// TODO This should be cached per-resource since this is an expensive check.
 	let twoByteColor = false;
@@ -75,9 +75,9 @@ function readUsingDataView(event) {
 		let uy = sourceView.getInt32(i * pointSize + 4, true);
 		let uz = sourceView.getInt32(i * pointSize + 8, true);
 
-		x = ux * scale[0] + offset[0] - event.data.mins[0];
-		y = uy * scale[1] + offset[1] - event.data.mins[1];
-		z = uz * scale[2] + offset[2] - event.data.mins[2];
+		let x = ux * scale[0] + offset[0] - event.data.mins[0];
+		let y = uy * scale[1] + offset[1] - event.data.mins[1];
+		let z = uz * scale[2] + offset[2] - event.data.mins[2];
 
 		positions[3 * i + 0] = x;
 		positions[3 * i + 1] = y;

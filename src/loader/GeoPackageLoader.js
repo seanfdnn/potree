@@ -1,3 +1,4 @@
+import * as THREE from 'three';
 
 import {Utils} from "../utils.js";
 
@@ -113,7 +114,7 @@ export class GeoPackageLoader{
 			}
 
 			resolve(geo);
-		}
+		};
 
 		return new Promise(resolver);
 	}
@@ -155,9 +156,9 @@ export class GeoPackageLoader{
 			}
 			
 			for(let i = 0; i < coordinates.length; i += 3){
-				coordinates[i+0] -= min.x;
-				coordinates[i+1] -= min.y;
-				coordinates[i+2] -= min.z;
+				coordinates[i + 0] -= min.x;
+				coordinates[i + 1] -= min.y;
+				coordinates[i + 2] -= min.z;
 			}
 			
 			const lineGeometry = new THREE.LineGeometry();
@@ -190,9 +191,9 @@ export class GeoPackageLoader{
 				}
 				
 				for(let i = 0; i < coordinates.length; i += 3){
-					coordinates[i+0] -= min.x;
-					coordinates[i+1] -= min.y;
-					coordinates[i+2] -= min.z;
+					coordinates[i + 0] -= min.x;
+					coordinates[i + 1] -= min.y;
+					coordinates[i + 2] -= min.z;
 				}
 
 				const lineGeometry = new THREE.LineGeometry();

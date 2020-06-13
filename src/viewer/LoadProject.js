@@ -112,7 +112,7 @@ function loadVolume(viewer, data){
 		return;
 	}
 
-	let volume = new Potree[data.type];
+	let volume = new Potree[data.type]();
 
 	volume.uuid = data.uuid;
 	volume.name = data.name;

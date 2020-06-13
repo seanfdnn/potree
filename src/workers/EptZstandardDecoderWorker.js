@@ -10,7 +10,7 @@ onmessage = async function(event) {
 	const arr = new Uint8Array(event.data.buffer);
 	const decompressed = streaming.decompress(arr);
 
-	event.data.buffer = decompressed.buffer
+	event.data.buffer = decompressed.buffer;
 	parseEpt(event);
 	
 };

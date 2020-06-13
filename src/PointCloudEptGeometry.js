@@ -91,14 +91,11 @@ export class PointCloudEptGeometry {
 		const dataType = info.dataType;
 		if (dataType == 'laszip') {
 			this.loader = new Potree.EptLaszipLoader();
-		}
-		else if (dataType == 'binary') {
+		} else if (dataType == 'binary') {
 			this.loader = new Potree.EptBinaryLoader();
-		}
-		else if (dataType == 'zstandard') {
+		} else if (dataType == 'zstandard') {
 			this.loader = new Potree.EptZstandardLoader();
-		}
-		else {
+		} else {
 			throw new Error('Could not read data type: ' + dataType);
 		}
 	}
@@ -258,7 +255,7 @@ export class PointCloudEptGeometryNode extends PointCloudTreeNode {
 
 		keys.forEach((v) => {
 			let [d, x, y, z] = v.split('-').map((n) => parseInt(n, 10));
-			let a = x & 1, b = y & 1, c = z & 1;
+			let a = x & 1; let b = y & 1; let c = z & 1;
 			let parentName =
 				(d - 1) + '-' + (x >> 1) + '-' + (y >> 1) + '-' + (z >> 1);
 

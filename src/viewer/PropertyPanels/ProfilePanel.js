@@ -1,4 +1,4 @@
-
+import * as THREE from 'three';
 
 import {MeasurePanel} from "./MeasurePanel.js";
 
@@ -212,13 +212,13 @@ export class ProfilePanel extends MeasurePanel{
 		{ // WAIT, CHECK PROGRESS, HANDLE FINISH
 			let url = `${viewer.server}/check_regions_filter?handle=${handle}`;
 
-			let sleep = (function(duration){
+			let sleep = function(duration){
 				return new Promise( (res, rej) => {
 					setTimeout(() => {
 						res();
 					}, duration);
 				});
-			});
+			};
 
 			let handleFiltering = (jsResponse) => {
 				let {progress, estimate} = jsResponse;
