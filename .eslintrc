@@ -1,33 +1,5 @@
 {
 	"extends": "happiness",
-	"globals": {
-		"TWEEN": false,
-		"$": false,
-		"XMLHttpRequest": false,
-		"requestAnimationFrame": false,
-		"Blob": false,
-		"i18n": false,
-		"URL": false,
-		"Stats": false,
-		"ProgressBar": false,
-		"d3": false,
-		"btoa": false,
-		"alert": false,
-		"ol": false,
-		"shapefile": false,
-		"Worker": false,
-		"Image": false,
-		"LASFile": false,
-		"LASDecoder": false,
-		"BinaryHeap": false,
-		"performance": false,
-		"Potree": true,
-		"initSidebar": true,
-		"HoverMenu": true,
-		"HoverMenuItem": true,
-		"LRU": true,
-		"viewer": true
-	},
 	"rules": {
 		"no-lone-blocks": "off",
 		"space-before-function-paren": "off",
@@ -43,9 +15,14 @@
 		"padded-blocks": "off",
 		"comma-dangle": "off",
 		"object-property-newline": "off",
-		"eol-last": "off"
+		"eol-last": "off",
+		"no-unused-vars": "off"
 	},
 	"parserOptions": { 
-		"ecmaVersion": 6 
+		"ecmaVersion": 11
+	},
+	"env": {
+		"browser": true,
+		"worker": true
 	}
 }

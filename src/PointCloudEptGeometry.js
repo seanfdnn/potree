@@ -1,3 +1,4 @@
+import * as THREE from 'three';
 import {PointCloudTreeNode} from "./PointCloudTree.js";
 import {PointAttributes, PointAttribute, PointAttributeTypes} from "./loader/PointAttributes.js";
 

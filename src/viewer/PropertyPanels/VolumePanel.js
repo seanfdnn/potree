@@ -1,3 +1,4 @@
+import * as THREE from 'three';
 
 import {Utils} from "../../utils.js";
 import {Volume, BoxVolume, SphereVolume} from "../../utils/Volume.js";

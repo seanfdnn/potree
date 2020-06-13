@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import 'proj4';
 
 import {ClipTask, ClipMethod, CameraMode, LengthUnits, ElevationGradientRepeat} from "../defines.js";
 import {Renderer} from "../PotreeRenderer.js";
