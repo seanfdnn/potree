@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import * as TWEEN from 'tween';
 
 import {MOUSE} from "../defines.js";
 import {Utils} from "../utils.js";
