@@ -1,6 +1,5 @@
 import * as THREE from 'three';
 import TWEEN from 'tweenjs';
-import proj4 from 'proj4';
 import i18n from 'i18next';
 import { Stats } from 'stats.js';
 
@@ -34,8 +33,6 @@ import {EarthControls} from "../navigation/EarthControls.js";
 import {DeviceOrientationControls} from "../navigation/DeviceOrientationControls.js";
 import { EventDispatcher } from "../EventDispatcher.js";
 import { ClassificationScheme } from "../materials/ClassificationScheme.js";
-
-
 
 export class Viewer extends EventDispatcher{
 	
@@ -1046,16 +1043,6 @@ export class Viewer extends EventDispatcher{
 			this.fpControls.addEventListener('end', this.enableAnnotations.bind(this));
 		}
 
-		// { // create GEO CONTROLS
-		//	this.geoControls = new GeoControls(this.scene.camera, this.renderer.domElement);
-		//	this.geoControls.enabled = false;
-		//	this.geoControls.addEventListener("start", this.disableAnnotations.bind(this));
-		//	this.geoControls.addEventListener("end", this.enableAnnotations.bind(this));
-		//	this.geoControls.addEventListener("move_speed_changed", (event) => {
-		//		this.setMoveSpeed(this.geoControls.moveSpeed);
-		//	});
-		// }
-
 		{ // create ORBIT CONTROLS
 			this.orbitControls = new OrbitControls(this);
 			this.orbitControls.enabled = false;
@@ -1231,7 +1218,6 @@ export class Viewer extends EventDispatcher{
 				const file = item.getAsFile();
 
 				const isJson = file.name.toLowerCase().endsWith(".json");
-				const isGeoPackage = file.name.toLowerCase().endsWith(".gpkg");
 
 				if(isJson){
 					try{
@@ -1245,29 +1231,6 @@ export class Viewer extends EventDispatcher{
 					}catch(e){
 						console.error("failed to parse the dropped file as JSON");
 						console.error(e);
-					}
-				}else if(isGeoPackage){
-					const hasPointcloud = viewer.scene.pointclouds.length > 0;
-
-					if(!hasPointcloud){
-						let msg = "At least one point cloud is needed that specifies the ";
-						msg += "coordinate reference system before loading vector data.";
-						console.error(msg);
-					}else{
-
-						proj4.defs("WGS84", "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs");
-						proj4.defs("pointcloud", this.getProjection());
-						let transform = proj4("WGS84", "pointcloud");
-
-						const buffer = await file.arrayBuffer();
-
-						const params = {
-							transform: transform,
-							source: file.name,
-						};
-						
-						const geo = await Potree.GeoPackageLoader.loadBuffer(buffer, params);
-						viewer.scene.addGeopackage(geo);
 					}
 				}
 				
