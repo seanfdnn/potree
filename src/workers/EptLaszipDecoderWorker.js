@@ -6,14 +6,10 @@ function readUsingDataView(event) {
 	let pointSize = event.data.pointSize;
 	let pointFormat = event.data.pointFormatID;
 
-	// gps time byte offsets from LAS specification
-	let gpsOffsets = [null, 20, null, 20, 20, 20, 22, 22, 22, 22, 22]; 
-	let gpsOffset = gpsOffsets[pointFormat];
 
 	let scale = event.data.scale;
 	let offset = event.data.offset;
 
-	let sourceUint8 = new Uint8Array(buffer);
 	let sourceView = new DataView(buffer);
 
 	let tightBoundingBox = {
@@ -53,7 +49,7 @@ function readUsingDataView(event) {
 
 	// Point format 3 contains an 8-byte GpsTime before RGB values, so make
 	// sure we have the correct color offset.
-	let hasColor = pointFormat == 2 || pointFormat == 3;
+	let hasColor = pointFormat === 2 || pointFormat === 3;
 	let co = pointFormat === 2 ? 20 : 28;
 
 	// TODO This should be cached per-resource since this is an expensive check.

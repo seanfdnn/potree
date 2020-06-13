@@ -29,5 +29,10 @@
 		"worker": true,
 		"jquery": true,
 		"commonjs": true
+	},
+	"globals": {
+		"Potree": false,
+		"VRFrameData": false,
+		"viewer": false
 	}
 }

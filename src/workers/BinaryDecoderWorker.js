@@ -1,7 +1,7 @@
 
 
 import {Version} from "../Version.js";
-import {PointAttributes, PointAttribute, PointAttributeTypes} from "../loader/PointAttributes.js";
+import {PointAttribute, PointAttributeTypes} from "../loader/PointAttributes.js";
 
 const typedArrayMapping = {
 	"int8":   Int8Array,
@@ -16,8 +16,6 @@ const typedArrayMapping = {
 	"double": Float64Array,
 };
 
-Potree = {};
-
 onmessage = function (event) {
 
 	performance.mark("binary-decoder-start");
@@ -29,9 +27,6 @@ onmessage = function (event) {
 	let version = new Version(event.data.version);
 	let nodeOffset = event.data.offset;
 	let scale = event.data.scale;
-	let spacing = event.data.spacing;
-	let hasChildren = event.data.hasChildren;
-	let name = event.data.name;
 	
 	let tightBoxMin = [ Number.POSITIVE_INFINITY, Number.POSITIVE_INFINITY, Number.POSITIVE_INFINITY ];
 	let tightBoxMax = [ Number.NEGATIVE_INFINITY, Number.NEGATIVE_INFINITY, Number.NEGATIVE_INFINITY ];
@@ -173,7 +168,7 @@ onmessage = function (event) {
 			let f32 = new Float32Array(buff);
 
 			let TypedArray = typedArrayMapping[pointAttribute.type.name];
-			preciseBuffer = new TypedArray(numPoints);
+			let preciseBuffer = new TypedArray(numPoints);
 
 			let [min, max] = [Infinity, -Infinity];
 			let [offset, scale] = [0, 1];

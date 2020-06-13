@@ -1,6 +1,8 @@
 
 import * as THREE from 'three';
 import * as TWEEN from 'tween';
+import * as shapefile from 'shapefile';
+import * as proj4 from 'proj4';
 import {XHRFactory} from "./XHRFactory.js";
 import {Volume} from "./utils/Volume.js";
 import {Profile} from "./utils/Profile.js";
@@ -612,7 +614,6 @@ export class Utils {
 		let closestNode = null;
 		let closestIndex = Infinity;
 		let closestDistance = Infinity;
-		let closestValue = 0;
 
 		for(const node of nodes){
 
@@ -636,7 +637,6 @@ export class Utils {
 				if(distance < closestDistance){
 					closestIndex = i;
 					closestDistance = distance;
-					closestValue = value;
 					closestNode = node;
 					//console.log("found a closer one: " + value);
 				}
@@ -794,7 +794,7 @@ export class Utils {
 
 		textArea.select();
 
-		 try {
+		try {
 			let success = document.execCommand('copy');
 			if(success){
 				console.log("copied text to clipboard");
@@ -839,7 +839,7 @@ export class Utils {
 
 		const d = (m, n, o, p) => {
 			let result =  
-				  (P[m].x - P[n].x) * (P[o].x - P[p].x) +
+				(P[m].x - P[n].x) * (P[o].x - P[p].x) +
 				(P[m].y - P[n].y) * (P[o].y - P[p].y) +
 				(P[m].z - P[n].z) * (P[o].z - P[p].z);
 
@@ -848,13 +848,15 @@ export class Utils {
 
 
 		const mua = (d(0, 2, 3, 2) * d(3, 2, 1, 0) - d(0, 2, 1, 0) * d(3, 2, 3, 2))
-		        /**-----------------------------------------------------------------**/ /
-		            (d(1, 0, 1, 0) * d(3, 2, 3, 2) - d(3, 2, 1, 0) * d(3, 2, 1, 0));
+				// eslint-disable-next-line operator-linebreak
+				/**-----------------------------------------------------------------**/ / 
+					(d(1, 0, 1, 0) * d(3, 2, 3, 2) - d(3, 2, 1, 0) * d(3, 2, 1, 0));
 
 
 		const mub = (d(0, 2, 3, 2) + mua * d(3, 2, 1, 0))
-		        /**--------------------------------------**/ /
-		                       d(3, 2, 3, 2);
+				// eslint-disable-next-line operator-linebreak
+				/**--------------------------------------**/ /
+							d(3, 2, 3, 2);
 
 
 		const P01 = P1.clone().sub(P0);
@@ -874,29 +876,22 @@ export class Utils {
 
 		const N = AC.clone().cross(AB).normalize();
 
-		const ab_dir = AB.clone().cross(N).normalize();
-		const ac_dir = AC.clone().cross(N).normalize();
+		const abDir = AB.clone().cross(N).normalize();
+		const acDir = AC.clone().cross(N).normalize();
 
-		const ab_origin = A.clone().add(B).multiplyScalar(0.5);
-		const ac_origin = A.clone().add(C).multiplyScalar(0.5);
+		const abOrigin = A.clone().add(B).multiplyScalar(0.5);
+		const acOrigin = A.clone().add(C).multiplyScalar(0.5);
 
-		const P0 = ab_origin;
-		const P1 = ab_origin.clone().add(ab_dir);
+		const P0 = abOrigin;
+		const P1 = abOrigin.clone().add(abDir);
 
-		const P2 = ac_origin;
-		const P3 = ac_origin.clone().add(ac_dir);
+		const P2 = acOrigin;
+		const P3 = acOrigin.clone().add(acDir);
 
 		const center = Utils.lineToLineIntersection(P0, P1, P2, P3);
 
 		return center;
 
-		// Potree.Utils.debugLine(viewer.scene.scene, P0, P1, 0x00ff00);
-		// Potree.Utils.debugLine(viewer.scene.scene, P2, P3, 0x0000ff);
-
-		// Potree.Utils.debugSphere(viewer.scene.scene, center, 0.03, 0xff00ff);
-
-		// const radius = center.distanceTo(A);
-		// Potree.Utils.debugCircle(viewer.scene.scene, center, radius, new THREE.Vector3(0, 0, 1), 0xff00ff);
 	}
 
 	static getNorthVec(p1, distance, projection){

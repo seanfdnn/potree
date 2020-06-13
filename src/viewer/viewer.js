@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import * as TWEEN from 'tween';
 import * as proj4 from 'proj4';
+import * as i18n from 'i18next';
 
 import {ClipTask, ClipMethod, CameraMode, LengthUnits, ElevationGradientRepeat} from "../defines.js";
 import {Renderer} from "../PotreeRenderer.js";
@@ -687,7 +688,7 @@ export class Viewer extends EventDispatcher{
 				break;
 		}
 
-		this.dispatchEvent({ 'type': 'length_unit_changed', 'viewer': this, value: value});
+		this.dispatchEvent({'type': 'length_unit_changed', 'viewer': this, value: value});
 	};
 
 	setLengthUnitAndDisplayUnit(lengthUnitValue, lengthUnitDisplayValue) {
@@ -910,7 +911,7 @@ export class Viewer extends EventDispatcher{
 		this.scene.cameraMode = mode;
 
 		for(let pointcloud of this.scene.pointclouds) {
-			pointcloud.material.useOrthographicCamera = mode == CameraMode.ORTHOGRAPHIC;
+			pointcloud.material.useOrthographicCamera = mode === CameraMode.ORTHOGRAPHIC;
 		}
 	}
 
@@ -1414,8 +1415,6 @@ export class Viewer extends EventDispatcher{
 		this.scene.cameraP.updateMatrixWorld();
 		this.scene.cameraO.updateMatrixWorld();
 		
-		let distances = [];
-
 		let renderAreaSize = this.renderer.getSize(new THREE.Vector2());
 
 		let viewer = this;
@@ -1509,37 +1508,6 @@ export class Viewer extends EventDispatcher{
 		for(let annotation of notVisibleAnymore){
 			annotation.display = false;
 		}
-
-	}
-
-	updateMaterialDefaults(pointcloud){
-		// PROBLEM STATEMENT:
-		// * [min, max] of intensity, source id, etc. are computed as point clouds are loaded
-		// * the point cloud material won't know the range it should use until some data is loaded
-		// * users can modify the range at runtime, but sensible default ranges should be 
-		//   applied even if no GUI is present
-		// * display ranges shouldn't suddenly change even if the actual range changes over time.
-		//   e.g. the root node has intensity range [1, 478]. One of the descendants increases range to 
-		//   [0, 2047]. We should not automatically change to the new range because that would result
-		//   in sudden and drastic changes of brightness. We should adjust the min/max of the sidebar slider.
-
-		const material = pointcloud.material;
-
-		// const attIntensity = pointcloud.getAttribute("intensity");
-		// if(attIntensity && material.intensityRange[0] === Infinity){
-		// 	material.intensityRange = [...attIntensity.range];
-		// }
-
-		// let attributes = pointcloud.getAttributes();
-
-		// for(let attribute of attributes.attributes){
-		// 	if(attribute.range){
-		// 		let range = [...attribute.range];
-		// 		material.computedRange.set(attribute.name, range);
-		// 		//material.setRange(attribute.name, range);
-		// 	}
-		// }
-
 
 	}
 
@@ -1661,7 +1629,6 @@ export class Viewer extends EventDispatcher{
 
 			//console.log(lowestDistance.toString(2), duration);
 
-			const tStart = performance.now();
 			const campos = camera.position;
 			let closestImage = Infinity;
 			for(const images of this.scene.orientedImages){
@@ -1671,7 +1638,6 @@ export class Viewer extends EventDispatcher{
 					closestImage = Math.min(closestImage, distance);
 				}
 			}
-			const tEnd = performance.now();
 
 			if(result.lowestSpacing !== Infinity){
 				let near = result.lowestSpacing * 10.0;
@@ -1692,7 +1658,7 @@ export class Viewer extends EventDispatcher{
 				// don't change near and far in this case
 			}
 
-			if(this.scene.cameraMode == CameraMode.ORTHOGRAPHIC) {
+			if(this.scene.cameraMode === CameraMode.ORTHOGRAPHIC) {
 				camera.near = -camera.far;
 			}
 		} 
@@ -1980,7 +1946,6 @@ export class Viewer extends EventDispatcher{
 					const height = this.scaleFactor * this.renderArea.clientHeight;
 
 					this.renderer.setSize(width, height);
-					const pixelRatio = this.renderer.getPixelRatio();
 					const aspect = width / height;
 
 					const scene = this.scene;
@@ -2067,7 +2032,7 @@ export class Viewer extends EventDispatcher{
 					names.add(groupname);
 				}
 				
-				for(let [name, group] of groups){
+				for(let [_, group] of groups){
 					group.mean = group.sum / group.n;
 					group.measures.sort( (a, b) => a.duration - b.duration );
 					
@@ -2159,7 +2124,6 @@ export class Viewer extends EventDispatcher{
 			this.stats.begin();
 		}
 
-		let queryAll;
 		if(Potree.measureTimings){
 			performance.mark("loop-start");
 		}

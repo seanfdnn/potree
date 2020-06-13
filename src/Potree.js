@@ -7,6 +7,8 @@ import {POCLoader} from "./loader/POCLoader.js";
 import {EptLoader} from "./loader/EptLoader.js";
 import {PointCloudOctree} from "./PointCloudOctree.js";
 import {WorkerPool} from "./WorkerPool.js";
+import {PointCloudArena4D} from "./arena4d/PointCloudArena4D";
+import {PointCloudArena4DGeometry} from "./arena4d/PointCloudArena4DGeometry";
 
 export * as THREE from 'three';
 
