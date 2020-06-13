@@ -2,7 +2,7 @@ import * as THREE from 'three';
 
 import {EventDispatcher} from "../EventDispatcher.js";
 
-Potree.PointCloudArena4DGeometryNode = class PointCloudArena4DGeometryNode{
+export class PointCloudArena4DGeometryNode{
 
 	constructor(){
 		this.left = null;
@@ -83,17 +83,6 @@ Potree.PointCloudArena4DGeometryNode = class PointCloudArena4DGeometryNode{
 			let buffer = xhr.response;
 			let sourceView = new DataView(buffer);
 			let numPoints = buffer.byteLength / 17;
-			let bytesPerPoint = 28;
-
-			let data = new ArrayBuffer(numPoints * bytesPerPoint);
-			let targetView = new DataView(data);
-
-			let attributes = [
-				Potree.PointAttribute.POSITION_CARTESIAN,
-				Potree.PointAttribute.RGBA_PACKED,
-				Potree.PointAttribute.INTENSITY,
-				Potree.PointAttribute.CLASSIFICATION,
-			];
 
 
 			let position = new Float32Array(numPoints * 3);
@@ -178,10 +167,7 @@ Potree.PointCloudArena4DGeometryNode = class PointCloudArena4DGeometryNode{
 };
 
 
-
-
-
-Potree.PointCloudArena4DGeometry = class PointCloudArena4DGeometry extends EventDispatcher{
+export class PointCloudArena4DGeometry extends EventDispatcher{
 
 	constructor(){
 		super();

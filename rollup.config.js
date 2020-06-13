@@ -13,7 +13,8 @@ export default [
 		plugins: [
 			resolve(),
 			babel({ babelHelpers: 'bundled' })
-		]
+		],
+		external: ['stats.js', 'ol'],
 	}, {
 		input: 'src/workers/BinaryDecoderWorker.js',
 		output: {
@@ -30,5 +31,5 @@ export default [
 			name: 'Potree',
 			sourcemap: false
 		}
-	}
+	},
 ];

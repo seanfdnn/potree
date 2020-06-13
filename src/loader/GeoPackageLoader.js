@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import '@ngageoint/geopackage';
 import { Line2 } from 'three/examples/jsm/lines/Line2.js';
+import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial.js';
 import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry.js';
 
 const defaultColors = {
@@ -79,7 +80,7 @@ export class GeoPackageLoader{
 				boundingBox = boundingBox.projectBoundingBox(dao.projection, 'EPSG:4326');
 				const geoJson = data.queryForGeoJSONFeaturesInTable(table, boundingBox);
 
-				const matLine = new THREE.LineMaterial( {
+				const matLine = new LineMaterial( {
 					color: new THREE.Color().setRGB(...getColor(table)),
 					linewidth: 2, 
 					resolution:  new THREE.Vector2(1000, 1000),

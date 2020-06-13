@@ -1,6 +1,6 @@
 import * as THREE from 'three';
-import * as proj4 from 'proj4';
-import * as ol from 'ol';
+import proj4 from 'proj4';
+import ol from 'ol';
 // http://epsg.io/
 proj4.defs([
 	['UTM10N', '+proj=utm +zone=10 +ellps=GRS80 +datum=NAD83 +units=m +no_defs'],

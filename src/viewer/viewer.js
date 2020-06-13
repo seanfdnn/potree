@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import * as TWEEN from 'tween';
-import * as proj4 from 'proj4';
-import * as i18n from 'i18next';
+import proj4 from 'proj4';
+import i18n from 'i18next';
 import { Stats } from 'stats.js';
 
 import {ClipTask, ClipMethod, CameraMode, LengthUnits, ElevationGradientRepeat} from "../defines.js";
@@ -1203,7 +1203,7 @@ export class Viewer extends EventDispatcher{
 	}
 
 	setLanguage (lang) {
-		i18n.setLng(lang);
+		i18n.changeLanguage(lang);
 		$('body').i18n();
 	}
 

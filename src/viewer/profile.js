@@ -25,8 +25,6 @@ function copyMaterial(source, target){
 
 	target.activeAttributeName = source.activeAttributeName;
 	target.ranges = source.ranges;
-
-	//target.updateShaderSource();
 }
 
 
@@ -652,10 +650,10 @@ export class ProfileWindow extends EventDispatcher {
 
 		this.svg.selectAll('*').remove();
 
-		this.scaleX = d3.scale.linear()
+		this.scaleX = d3.scaleLinear()
 			.domain([this.camera.left + this.camera.position.x, this.camera.right + this.camera.position.x])
 			.range([0, width]);
-		this.scaleY = d3.scale.linear()
+		this.scaleY = d3.scaleLinear()
 			.domain([this.camera.bottom + this.camera.position.z, this.camera.top + this.camera.position.z])
 			.range([height, 0]);
 
@@ -731,7 +729,7 @@ export class ProfileWindow extends EventDispatcher {
 		this.render();
 
 		let numPoints = 0;
-		for (let [key, value] of this.pointclouds.entries()) {
+		for (let [, value] of this.pointclouds.entries()) {
 			numPoints += value.points.reduce( (a, i) => a + i.numPoints, 0);
 		}
 		$(`#profile_num_points`).html(Utils.addCommas(numPoints));
