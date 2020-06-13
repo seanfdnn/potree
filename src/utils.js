@@ -1,6 +1,6 @@
 
 import * as THREE from 'three';
-import * as TWEEN from 'tween';
+import TWEEN from '@tweenjs/tween.js';
 import * as shapefile from 'shapefile';
 import proj4 from 'proj4';
 import {XHRFactory} from "./XHRFactory.js";

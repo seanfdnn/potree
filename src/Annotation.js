@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import TWEEN from 'tweenjs';
+import TWEEN from '@tweenjs/tween.js';
 
 
 import {Action} from "./Actions.js";

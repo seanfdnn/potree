@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import TWEEN from 'tweenjs';
+import TWEEN from 'tweenjs/lib/tweenjs';
 
 export class PathAnimation{
 	
