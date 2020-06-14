@@ -4,10 +4,6 @@ import TWEEN from '@tweenjs/tween.js';
 import * as shapefile from 'shapefile';
 import proj4 from 'proj4';
 import {XHRFactory} from "./XHRFactory.js";
-import {Volume} from "./utils/Volume.js";
-import {Profile} from "./utils/Profile.js";
-import {Measure} from "./utils/Measure.js";
-import {PolygonClipVolume} from "./utils/PolygonClipVolume.js";
 
 export class Utils {
 	static async loadShapefileFeatures (file, callback) {

@@ -63,7 +63,7 @@ export function updateVisibilityStructures(pointclouds, camera, renderer) {
 		let proj = camera.projectionMatrix;
 
 		let fm = new THREE.Matrix4().multiply(proj).multiply(viewI).multiply(world);
-		frustum.setFromMatrix(fm);
+		frustum.setFromProjectionMatrix(fm);
 		frustums.push(frustum);
 
 		// camera position in object space
@@ -172,7 +172,7 @@ export function updateVisibility(pointclouds, camera, renderer){
 		let maxLevel = pointcloud.maxLevel || Infinity;
 		let level = node.getLevel();
 		let visible = insideFrustum;
-		visible = visible && !(numVisiblePoints + node.getNumPoints() > Potree.pointBudget);
+		visible = visible && !(numVisiblePoints + node.getNumPoints() > exports.pointBudget);
 		visible = visible && !(numVisiblePointsInPointclouds.get(pointcloud) + node.getNumPoints() > pointcloud.pointBudget);
 		visible = visible && level < maxLevel;
 		//visible = visible && node.name !== "r613";

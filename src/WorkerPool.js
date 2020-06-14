@@ -1,20 +1,20 @@
 
 export class WorkerPool{
 	constructor(){
-		this.workers = {};
+		this.workers = [];
 	}
 
-	getWorker(url){
-		if (!this.workers[url]){
-			this.workers[url] = [];
+	getWorker(key, factory){
+		if (!this.workers[key]){
+			this.workers[key] = [];
 		}
 
-		if (this.workers[url].length === 0){
-			let worker = new Worker(url);
-			this.workers[url].push(worker);
+		if (this.workers[key].length === 0){
+			let worker = factory();
+			this.workers[key].push(worker);
 		}
 
-		let worker = this.workers[url].pop();
+		let worker = this.workers[key].pop();
 
 		return worker;
 	}

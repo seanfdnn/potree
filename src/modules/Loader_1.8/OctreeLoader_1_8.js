@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import {PointAttribute, PointAttributes, PointAttributeTypes} from "../../loader/PointAttributes.js";
 import {OctreeGeometry, OctreeGeometryNode} from "./OctreeGeometry.js";
+import OctreeDecoderWorker from 'web-worker:./OctreeDecoderWorker.js';
 
 export class NodeLoader{
 
@@ -39,15 +40,16 @@ export class NodeLoader{
 
 			let buffer = await response.arrayBuffer();
 
-			let workerPath = exports.scriptPath + '/workers/OctreeDecoderWorker.js';
-			let worker = exports.workerPool.getWorker(workerPath);
+			let workerKey = 'OctreeDecoderWorker';
+			// eslint-disable-next-line no-new
+			let worker = exports.workerPool.getWorker(workerKey, () => { new OctreeDecoderWorker(); } );
 
 			worker.onmessage = function (e) {
 
 				let data = e.data;
 				let buffers = data.attributeBuffers;
 
-				exports.workerPool.returnWorker(workerPath, worker);
+				exports.workerPool.returnWorker(workerKey, worker);
 
 				let geometry = new THREE.BufferGeometry();
 				

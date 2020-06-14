@@ -1,5 +1,7 @@
 import resolve from '@rollup/plugin-node-resolve';
 import babel from '@rollup/plugin-babel';
+import image from '@rollup/plugin-image';
+import webWorkerLoader from 'rollup-plugin-web-worker-loader';
 export default [
 	{
 		input: 'src/Potree.js',
@@ -16,23 +18,9 @@ export default [
 		},
 		plugins: [
 			resolve(),
-			babel({ babelHelpers: 'bundled' })
+			babel({ babelHelpers: 'bundled' }),
+			image(),
+			webWorkerLoader({platform: 'browser'}),
 		],
-	}, {
-		input: 'src/workers/BinaryDecoderWorker.js',
-		output: {
-			file: 'build/potree/workers/BinaryDecoderWorker.js',
-			format: 'es',
-			name: 'Potree',
-			sourcemap: false
-		}
-	}, {
-		input: 'src/modules/Loader_1.8/OctreeDecoderWorker.js',
-		output: {
-			file: 'build/potree/workers/OctreeDecoderWorker.js',
-			format: 'es',
-			name: 'Potree',
-			sourcemap: false
-		}
-	},
+	}, 
 ];

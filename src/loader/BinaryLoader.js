@@ -3,6 +3,7 @@ import * as THREE from 'three';
 import {Version} from "../Version.js";
 import {XHRFactory} from "../XHRFactory.js";
 
+import BinaryDecoderWorker from 'web-worker:../workers/BinaryDecoderWorker';
 
 export class BinaryLoader{
 
@@ -59,8 +60,9 @@ export class BinaryLoader{
 			node.numPoints = numPoints;
 		}
 
-		let workerPath = exports.scriptPath + '/workers/BinaryDecoderWorker.js';
-		let worker = exports.workerPool.getWorker(workerPath);
+		let workerKey = 'BinaryWorker';
+		// eslint-disable-next-line no-new
+		let worker = exports.workerPool.getWorker(workerKey, () => { new BinaryDecoderWorker(); } );
 
 		worker.onmessage = function (e) {
 
@@ -71,7 +73,7 @@ export class BinaryLoader{
 				new THREE.Vector3().fromArray(data.tightBoundingBox.max)
 			);
 
-			exports.workerPool.returnWorker(workerPath, worker);
+			exports.workerPool.returnWorker(workerKey, worker);
 
 			let geometry = new THREE.BufferGeometry();
 

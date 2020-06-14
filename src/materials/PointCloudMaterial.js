@@ -5,6 +5,7 @@ import {Gradients} from "./Gradients.js";
 import {Shaders} from "../../build/shaders/shaders.js";
 import {ClassificationScheme} from "./ClassificationScheme.js";
 import {PointSizeType, PointShape, TreeType, ElevationGradientRepeat} from "../defines.js";
+import matcapTextureUrl from "../../resources/textures/matcap/matcap.jpg";
 
 //
 // how to calculate the radius of a projected sphere in screen space
@@ -1064,7 +1065,8 @@ export class PointCloudMaterial extends THREE.RawShaderMaterial {
 	}
 	
 	static generateMatcapTexture (matcap) {
-	var url = new URL(exports.resourcePath + "/textures/matcap/" + matcap).href;
+	//var url = new URL(exports.resourcePath + "/textures/matcap/" + matcap).href;
+	var url = matcapTextureUrl;
 	let texture = new THREE.TextureLoader().load( url );
 		texture.magFilter = texture.minFilter = THREE.LinearFilter; 
 		texture.needsUpdate = true;

@@ -1625,8 +1625,11 @@ export class Viewer extends EventDispatcher{
 
 		{
 			if(this._previousCamera === undefined){
-				this._previousCamera = this.scene.getActiveCamera().clone();
-				this._previousCamera.rotation.copy(this.scene.getActiveCamera());
+				const activeCamera = this.scene.getActiveCamera();
+				if (activeCamera) {
+					this._previousCamera = activeCamera.clone();
+					this._previousCamera.rotation.copy(this.scene.getActiveCamera());
+				}
 			}
 
 			if(!this._previousCamera.matrixWorld.equals(camera.matrixWorld)){
@@ -1644,7 +1647,9 @@ export class Viewer extends EventDispatcher{
 			}
 
 			this._previousCamera = this.scene.getActiveCamera().clone();
-			this._previousCamera.rotation.copy(this.scene.getActiveCamera());
+			if (this._previousCamera.rotation){
+				this._previousCamera.rotation.copy(this.scene.getActiveCamera());
+			}
 
 		}
 
@@ -1910,6 +1915,11 @@ export class Viewer extends EventDispatcher{
 			performance.mark("render-end");
 			performance.measure("render", "render-start", "render-end");
 		}
+	}
+
+	
+	updateMaterialDefaults(pointcloud){
+
 	}
 
 	resolveTimings(timestamp){
